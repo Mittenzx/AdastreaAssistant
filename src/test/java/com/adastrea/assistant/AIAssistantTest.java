@@ -113,9 +113,7 @@ class AIAssistantTest {
     @Test
     void testAssistantNameUsedInGreeting() {
         // The initialize method should use the assistant name
-        assistant.initialize();
-        // If no exception is thrown, the test passes
-        assertTrue(true);
+        assertDoesNotThrow(() -> assistant.initialize());
     }
 
     @Test
