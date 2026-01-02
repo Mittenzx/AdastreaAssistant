@@ -85,8 +85,9 @@ This document provides a high-level roadmap for implementing the AdastraAssistan
 ### Voice Synthesis (Choose One)
 
 **Option A: GPT-SoVITS** ⭐ Recommended for unique character
-- Pros: Unique voice, full control, one-time effort
-- Cons: Requires training data collection
+- Technology: GPT-based Singing Voice Integrated Text-to-Speech (neural voice cloning)
+- Pros: Unique voice, full control, one-time effort, high quality with minimal training data
+- Cons: Requires training data collection (20+ audio clips)
 - Best for: Distinctive character identity
 - Effort: Medium to High
 - Cost: Free (open-source)

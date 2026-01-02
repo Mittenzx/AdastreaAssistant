@@ -247,7 +247,7 @@ Modern game voice assistants follow a layered, modular architecture:
 ### Integration Patterns
 
 #### Game Engine Integration
-```
+```text
 Game State → Context Manager → Dialogue Manager → NLG → TTS → Audio Output
      ↑                                                              ↓
      └──────────────────── Player Action ←────────────────────────┘
