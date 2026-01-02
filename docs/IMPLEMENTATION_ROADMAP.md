@@ -8,6 +8,8 @@ This document provides a high-level roadmap for implementing the AdastraAssistan
 
 ## Implementation Phases
 
+_Timelines below assume one full-time developer; adjust proportionally for different team sizes or part-time allocations._
+
 ### Phase 1: Foundation (Weeks 1-2)
 **Goal**: Establish core architecture and personality
 
@@ -61,7 +63,7 @@ This document provides a high-level roadmap for implementing the AdastraAssistan
 - [ ] Performance optimization (latency, resource usage)
 - [ ] Extensive user testing and iteration
 - [ ] Accessibility features (subtitles, customization)
-- [ ] Multi-language support
+- [ ] Multilingual support
 - [ ] Analytics and monitoring implementation
 - [ ] Documentation and maintenance guides
 
@@ -168,7 +170,8 @@ Each mode maintains core personality while adapting tone and content.
 - Response latency < 500ms
 - Voice quality score > 4.0/5.0
 - System uptime > 99%
-- Memory usage < 100MB
+- Application RAM usage (excluding neural TTS model) < 100MB
+- TTS model GPU VRAM usage within model's documented requirements (e.g., ≤ 2GB for GPT-SoVITS-class models)
 - CPU usage < 5%
 
 ### User Experience Metrics
@@ -204,4 +207,4 @@ Each mode maintains core personality while adapting tone and content.
 
 *Roadmap Version: 1.0*  
 *Based on: VOICE_ASSISTANT_RESEARCH.md*  
-*Last Updated: January 2026*
+*Last Updated: January 2, 2026*

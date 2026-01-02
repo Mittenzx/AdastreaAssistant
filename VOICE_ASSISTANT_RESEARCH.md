@@ -105,7 +105,7 @@ Warframe exemplifies the gold standard for context-aware, mode-specific voice as
 
 ## Advanced Voice Synthesis Technologies
 
-### Current State of the Art (2024-2026)
+### Current State of the Art (as of 2024–early 2025)
 
 Modern voice synthesis has evolved from robotic TTS to highly realistic, emotionally expressive voice cloning powered by deep learning.
 
@@ -170,9 +170,9 @@ A particularly relevant example for game assistant implementation:
 - **Coqui TTS**: Open-source TTS toolkit
 - **OpenAI Whisper**: State-of-the-art speech recognition (STT component)
 
-### Technical Capabilities (2024-2026)
+### Technical Capabilities (as of 2024–early 2025)
 
-1. **Multi-lingual Support**: Synthesize across multiple languages
+1. **Multilingual Support**: Synthesize across multiple languages
 2. **Emotion Transfer**: Capture and reproduce emotional nuance
 3. **Style Adaptation**: Adjust speaking style (formal, casual, dramatic)
 4. **Real-time Synthesis**: Low-latency for interactive applications
@@ -446,7 +446,7 @@ AdastraAssistant has the opportunity to learn from these examples while creating
 - Warframe Cephalon System Documentation (Warframe Wiki)
 - GPT-SoVITS Voice Cloning Implementation (Ordis-TTS-model GitHub)
 - Project EchoCore: Cortana-Inspired AI Assistant (GitHub)
-- "The Sonic Frontier: Voice Cloning Technologies 2024-2025" (VocalCopycat)
+- "The Sonic Frontier: Voice Cloning Technologies 2024-2025" (VocalCopycat) — referenced only for developments up to January 2025; later updates were not available at the time of this research
 - "Beyond the Bubble: Context-Aware Memory Systems" (tribe.ai)
 - "Voice Assistant Implementation Best Practices" (PrecallAI)
 - "Technical Implementation of AI-Powered Chatbots" (IJFMR)
@@ -465,5 +465,5 @@ AdastraAssistant has the opportunity to learn from these examples while creating
 ---
 
 *Document Version: 1.0*  
-*Last Updated: January 2026*  
+*Last Updated: January 2, 2026*  
 *Research conducted for AdastraAssistant development*
