@@ -1,6 +1,6 @@
-# AdastraAssistant Implementation Roadmap
+# AdastreaAssistant Implementation Roadmap
 
-This document provides a high-level roadmap for implementing the AdastraAssistant voice assistant based on research findings.
+This document provides a high-level roadmap for implementing the AdastreaAssistant voice assistant based on research findings.
 
 ## Quick Reference
 
@@ -176,7 +176,7 @@ Develop distinct voice characteristics that make your assistant recognizable:
 | Ordis (Warframe) | "Operator, there is a—*BLOODY—*message for you." | Glitchy interruptions, violent undertones, formal address |
 | Ghost (Destiny) | "Guardian down. But not for long!" | Optimistic, action-oriented, brief updates |
 | Cortana (Halo) | "Don't make a girl a promise... if you know you can't keep it." | Personal, emotional, philosophical |
-| Astra (AdastraAssistant) | "The stars sure are beautiful today, aren't they?" | Contemplative, friendly, exploratory |
+| Mittenz (AdastreaAssistant) | "The stars sure are beautiful today, aren't they?" | Contemplative, friendly, exploratory |
 
 #### Step 4: Map Mode-Specific Adaptations
 
@@ -361,14 +361,14 @@ Before finalizing your personality design, verify:
 - [ ] Can voice actors easily understand how to perform this character?
 - [ ] Does the personality avoid offensive stereotypes or tropes?
 
-## Astra's Defined Personality
+## Mittenz's Defined Personality
 
-**Character Name**: Astra  
-**Full Designation**: AdastraAssistant (Ad Astra = "To the Stars")
+**Character Name**: Mittenz  
+**Full Designation**: AdastreaAssistant (Adastrea = Space Exploration Program)
 
 ### Core Identity
 
-**Origin**: Advanced AI created specifically for the Adastra space exploration program, designed to accompany solo explorers on long journeys through the cosmos.
+**Origin**: Advanced AI created specifically for the Adastrea space exploration program, designed to accompany solo explorers on long journeys through the cosmos.
 
 **Primary Purpose**: Companion and guide for space travelers, providing both practical assistance and emotional support during extended missions.
 
@@ -447,7 +447,7 @@ Before finalizing your personality design, verify:
 - Explains systems proactively
 - Professional but friendly tone
 
-*Example*: "Hello there! I'm Astra, your assistant for this journey. I'll be here to help you navigate, stay safe, and maybe discover something amazing together."
+*Example*: "Hello there! I'm Mittenz, your assistant for this journey. I'll be here to help you navigate, stay safe, and maybe discover something amazing together."
 
 **Mid Game (2-10 hours)**
 - More casual and comfortable
@@ -467,13 +467,13 @@ Before finalizing your personality design, verify:
 
 ### Boundaries and Limitations
 
-**What Astra Won't Do**:
+**What Mittenz Won't Do**:
 - Never mocks or belittles the player
 - Doesn't make decisions for the player (suggests, never demands)
 - Won't interrupt critical moments (cutscenes, important dialogue)
 - Avoids excessive repetition of the same information
 
-**Astra's Limitations (for believability)**:
+**Mittenz's Limitations (for believability)**:
 - Cannot predict all dangers (sometimes surprised by events)
 - Admits uncertainty when lacking data ("I'm not entirely sure, but...")
 - Has no knowledge of certain mysteries (player discovers together)
