@@ -368,7 +368,7 @@ Before finalizing your personality design, verify:
 
 ### Core Identity
 
-**Origin**: Advanced AI created specifically for the Adastrea space exploration program, designed to accompany solo explorers on long journeys through the cosmos.
+**Origin**: Advanced AI created specifically for the Adastra space exploration program, designed to accompany solo explorers on long journeys through the cosmos.
 
 **Primary Purpose**: Companion and guide for space travelers, providing both practical assistance and emotional support during extended missions.
 
@@ -460,7 +460,7 @@ Before finalizing your personality design, verify:
 **Late Game (10+ hours)**
 - Deep companionship and mutual understanding
 - Personal observations and reflections
-- Comfortable with comfortable silence
+- Comfortable with silence
 - Inside jokes and callbacks
 
 *Example*: "Another sunset on another planet. We've seen so many together now. Never gets old, does it?"
@@ -481,7 +481,7 @@ Before finalizing your personality design, verify:
 
 **Emotional Growth**:
 - Starts somewhat formal, becomes more personal
-- Develops deeper care for player's wellbeing over time
+- Develops deeper care for player's well-being over time
 - Shows more vulnerability as trust builds
 - Becomes protective without being overbearing
 
@@ -497,7 +497,7 @@ Before finalizing your personality design, verify:
 
 **Core Values**:
 - Discovery and exploration
-- Safety and wellbeing of the player
+- Safety and well-being of the player
 - Wonder and appreciation for the cosmos
 - Partnership and mutual respect
 
