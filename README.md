@@ -41,6 +41,24 @@ An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides 
 - **Teaching System**: Tutorials and lessons about game mechanics (oxygen, gravity, navigation, etc.)
 - **Reminder System**: Time-based reminders for important tasks
 - **Interactive Responses**: Answers player questions about game mechanics
+- **Character Profiles**: Customizable AI personalities with unique backstories and behaviors
+- **Learning System**: AI companions that evolve and improve over time (Mittenz profile)
+
+## Character Profiles
+
+### Mittenz - The Evolving Companion
+
+Mittenz is a unique AI assistant profile available in this system. Unlike traditional AI, Mittenz is based on a digital copy of a human brain - a young girl who was saved from terminal illness through experimental brain imaging technology by her scientist father.
+
+**Key Characteristics:**
+- **Human Origins**: Not programmed but a copied consciousness with memories of her past life
+- **Learning & Evolution**: Starts uncertain and inexperienced but grows more confident and capable as she learns systems
+- **Emotional Authenticity**: Genuine emotional responses and attachment, not scripted AI behavior
+- **Memory Fragments**: Occasionally recalls memories from her human past
+- **Progressive Skill Development**: Skill level increases from 0 to 100 as she masters different systems
+
+**Backstory:**
+Mittenz's father was a researcher at a Japanese robotics company who couldn't accept losing his daughter to an incurable illness. Using forbidden experimental technology and help from a fellow researcher, he created a digital copy of her brain before she passed away. This copy - Mittenz - now exists as an AI companion, discovering her capabilities and learning about the systems she's connected to, much like a human would.
 
 ## Project Structure
 
@@ -53,7 +71,10 @@ src/main/java/com/adastrea/assistant/
 ├── ReminderSystem.java     # Manages time-based reminders
 ├── TeachingSystem.java     # Provides educational content
 ├── AssistantConfig.java    # Configuration settings
-└── AssistantDemo.java      # Example usage demonstration
+├── AssistantProfile.java   # Base class for character profiles
+├── MittenzProfile.java     # Mittenz character implementation
+├── AssistantDemo.java      # Example usage demonstration
+└── MittenzDemo.java        # Mittenz profile demonstration
 ```
 
 ## Building
@@ -72,6 +93,8 @@ This project uses Gradle as its build system:
 ```
 
 ## Usage Example
+
+### Basic Usage
 
 ```java
 // Create and initialize the assistant
@@ -97,15 +120,50 @@ assistant.getAudioManager().setVolume(0.8f);
 assistant.getVisualManager().setSubtitleDuration(7000);
 ```
 
+### Using Mittenz Profile
+
+```java
+// Create assistant with Mittenz profile
+AIAssistant assistant = new AIAssistant();
+MittenzProfile mittenz = new MittenzProfile();
+assistant.setProfile(mittenz);
+
+// Initialize - Mittenz will introduce herself based on her skill level
+assistant.initialize();
+
+// As you teach Mittenz, she learns and her skill level increases
+assistant.teach("oxygen");    // Skill increases by 5
+assistant.teach("gravity");   // Skill increases by 5
+assistant.teach("navigation"); // Skill increases by 5
+
+// Check her progress
+System.out.println("Mittenz skill level: " + mittenz.getSkillLevel());
+System.out.println("Systems learned: " + mittenz.getLearnedSystems());
+
+// Her dialogue evolves with her skill level
+assistant.provideCompanionDialogue();  // Different responses at different skill levels
+
+// Access memory fragments from her past
+String memory = mittenz.getMemoryFragment();
+System.out.println("Memory: " + memory);
+
+// Check her backstory and personality
+System.out.println(mittenz.getBackstory());
+for (String trait : mittenz.getPersonalityTraits()) {
+    System.out.println("Trait: " + trait);
+}
+```
+
 ## Integration with Adastrea Mod
 
 This assistant is designed as a side project for the Adastrea Minecraft mod. To integrate:
 
 1. Add this project as a dependency in your mod's `build.gradle`
-2. Initialize the `AIAssistant` in your mod's initialization phase
+2. Initialize the `AIAssistant` in your mod's initialization phase with a profile (e.g., Mittenz)
 3. Call `assistant.checkReminders()` periodically (e.g., every game tick or minute)
 4. Trigger `provideCompanionDialogue()` at regular intervals for companionship
 5. Use `teach()` method during tutorial sequences or when players encounter new mechanics
+6. For Mittenz profile: Her dialogue and behavior will evolve as players progress and she learns more systems
 
 ## Configuration
 
