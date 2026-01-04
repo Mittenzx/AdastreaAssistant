@@ -121,4 +121,75 @@ class AIAssistantTest {
         assistant.setAssistantName("NewName");
         assertEquals("NewName", assistant.getAssistantName());
     }
+
+    @Test
+    void testInitialRelationshipStageIsHostile() {
+        assertEquals(RelationshipStage.HOSTILE, assistant.getRelationshipStage());
+    }
+
+    @Test
+    void testSetRelationshipStage() {
+        assistant.setRelationshipStage(RelationshipStage.CURIOUS);
+        assertEquals(RelationshipStage.CURIOUS, assistant.getRelationshipStage());
+        
+        assistant.setRelationshipStage(RelationshipStage.COOPERATIVE);
+        assertEquals(RelationshipStage.COOPERATIVE, assistant.getRelationshipStage());
+    }
+
+    @Test
+    void testProgressRelationshipStage() {
+        // Start at HOSTILE
+        assertEquals(RelationshipStage.HOSTILE, assistant.getRelationshipStage());
+        
+        // Progress to CURIOUS
+        assertTrue(assistant.progressRelationshipStage());
+        assertEquals(RelationshipStage.CURIOUS, assistant.getRelationshipStage());
+        
+        // Progress to COOPERATIVE
+        assertTrue(assistant.progressRelationshipStage());
+        assertEquals(RelationshipStage.COOPERATIVE, assistant.getRelationshipStage());
+        
+        // Cannot progress further
+        assertFalse(assistant.progressRelationshipStage());
+        assertEquals(RelationshipStage.COOPERATIVE, assistant.getRelationshipStage());
+    }
+
+    @Test
+    void testInteractionCountTracking() {
+        assertEquals(0, assistant.getInteractionCount());
+        
+        assistant.provideCompanionDialogue();
+        assertEquals(1, assistant.getInteractionCount());
+        
+        assistant.respondToQuery("test");
+        assertEquals(2, assistant.getInteractionCount());
+    }
+
+    @Test
+    void testResetInteractionCount() {
+        assistant.provideCompanionDialogue();
+        assistant.respondToQuery("test");
+        assertTrue(assistant.getInteractionCount() > 0);
+        
+        assistant.resetInteractionCount();
+        assertEquals(0, assistant.getInteractionCount());
+    }
+
+    @Test
+    void testAutomaticStageProgression() {
+        // Start at HOSTILE
+        assertEquals(RelationshipStage.HOSTILE, assistant.getRelationshipStage());
+        
+        // Interact 5 times to trigger progression to CURIOUS
+        for (int i = 0; i < 5; i++) {
+            assistant.provideCompanionDialogue();
+        }
+        assertEquals(RelationshipStage.CURIOUS, assistant.getRelationshipStage());
+        
+        // Interact 10 more times to trigger progression to COOPERATIVE (total 15)
+        for (int i = 0; i < 10; i++) {
+            assistant.provideCompanionDialogue();
+        }
+        assertEquals(RelationshipStage.COOPERATIVE, assistant.getRelationshipStage());
+    }
 }

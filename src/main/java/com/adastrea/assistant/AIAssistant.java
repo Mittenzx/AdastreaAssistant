@@ -16,6 +16,7 @@ public class AIAssistant {
     private final TeachingSystem teachingSystem;
     private boolean isEnabled;
     private String assistantName;
+    private int interactionCount;
 
     public AIAssistant() {
         this("Assistant");
@@ -29,6 +30,7 @@ public class AIAssistant {
         this.reminderSystem = new ReminderSystem();
         this.teachingSystem = new TeachingSystem();
         this.isEnabled = true;
+        this.interactionCount = 0;
     }
 
     /**
@@ -60,6 +62,7 @@ public class AIAssistant {
         if (isEnabled) {
             String dialogue = dialogueSystem.getRandomCompanionDialogue();
             speak(dialogue);
+            trackInteraction();
         }
     }
 
@@ -106,7 +109,86 @@ public class AIAssistant {
         }
         String response = dialogueSystem.generateResponse(query);
         speak(response);
+        trackInteraction();
         return response;
+    }
+
+    /**
+     * Track player interactions and progress relationship stage when threshold is reached
+     */
+    private void trackInteraction() {
+        interactionCount++;
+        
+        // Progress through stages based on interaction count
+        RelationshipStage currentStage = dialogueSystem.getCurrentStage();
+        
+        if (currentStage == RelationshipStage.HOSTILE && interactionCount >= 5) {
+            progressRelationshipStage();
+        } else if (currentStage == RelationshipStage.CURIOUS && interactionCount >= 15) {
+            progressRelationshipStage();
+        }
+    }
+
+    /**
+     * Get the current relationship stage with Mittenz
+     * @return The current relationship stage
+     */
+    public RelationshipStage getRelationshipStage() {
+        return dialogueSystem.getCurrentStage();
+    }
+
+    /**
+     * Manually set the relationship stage
+     * @param stage The new relationship stage
+     */
+    public void setRelationshipStage(RelationshipStage stage) {
+        dialogueSystem.setCurrentStage(stage);
+    }
+
+    /**
+     * Progress to the next relationship stage
+     * @return true if progressed, false if already at final stage
+     */
+    public boolean progressRelationshipStage() {
+        boolean progressed = dialogueSystem.progressStage();
+        if (progressed && isEnabled) {
+            // Provide feedback about the stage change
+            RelationshipStage newStage = dialogueSystem.getCurrentStage();
+            String stageMessage = getStageTransitionMessage(newStage);
+            if (stageMessage != null) {
+                speak(stageMessage);
+            }
+        }
+        return progressed;
+    }
+
+    /**
+     * Get a message for stage transitions
+     */
+    private String getStageTransitionMessage(RelationshipStage newStage) {
+        switch (newStage) {
+            case CURIOUS:
+                return "Wait... maybe I should understand what's happening here.";
+            case COOPERATIVE:
+                return "Okay, I get it now. We need to work together.";
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get the current interaction count
+     * @return The number of interactions
+     */
+    public int getInteractionCount() {
+        return interactionCount;
+    }
+
+    /**
+     * Reset the interaction count
+     */
+    public void resetInteractionCount() {
+        this.interactionCount = 0;
     }
 
     // Getters and Setters

@@ -47,4 +47,87 @@ class DialogueSystemTest {
         // If no exception thrown, test passes
         assertDoesNotThrow(() -> dialogueSystem.getGreeting());
     }
+
+    @Test
+    void testInitialStageIsHostile() {
+        assertEquals(RelationshipStage.HOSTILE, dialogueSystem.getCurrentStage());
+    }
+
+    @Test
+    void testSetCurrentStage() {
+        dialogueSystem.setCurrentStage(RelationshipStage.CURIOUS);
+        assertEquals(RelationshipStage.CURIOUS, dialogueSystem.getCurrentStage());
+        
+        dialogueSystem.setCurrentStage(RelationshipStage.COOPERATIVE);
+        assertEquals(RelationshipStage.COOPERATIVE, dialogueSystem.getCurrentStage());
+    }
+
+    @Test
+    void testProgressStage() {
+        // Start at HOSTILE
+        assertEquals(RelationshipStage.HOSTILE, dialogueSystem.getCurrentStage());
+        
+        // Progress to CURIOUS
+        assertTrue(dialogueSystem.progressStage());
+        assertEquals(RelationshipStage.CURIOUS, dialogueSystem.getCurrentStage());
+        
+        // Progress to COOPERATIVE
+        assertTrue(dialogueSystem.progressStage());
+        assertEquals(RelationshipStage.COOPERATIVE, dialogueSystem.getCurrentStage());
+        
+        // Cannot progress further
+        assertFalse(dialogueSystem.progressStage());
+        assertEquals(RelationshipStage.COOPERATIVE, dialogueSystem.getCurrentStage());
+    }
+
+    @Test
+    void testHostileStageDialogue() {
+        dialogueSystem.setCurrentStage(RelationshipStage.HOSTILE);
+        String dialogue = dialogueSystem.getRandomCompanionDialogue();
+        assertNotNull(dialogue);
+        assertFalse(dialogue.isEmpty());
+        // Verify it's not from the cooperative stage
+        assertFalse(dialogue.contains("We need to"));
+    }
+
+    @Test
+    void testCuriousStageDialogue() {
+        dialogueSystem.setCurrentStage(RelationshipStage.CURIOUS);
+        String dialogue = dialogueSystem.getRandomCompanionDialogue();
+        assertNotNull(dialogue);
+        assertFalse(dialogue.isEmpty());
+    }
+
+    @Test
+    void testCooperativeStageDialogue() {
+        dialogueSystem.setCurrentStage(RelationshipStage.COOPERATIVE);
+        String dialogue = dialogueSystem.getRandomCompanionDialogue();
+        assertNotNull(dialogue);
+        assertFalse(dialogue.isEmpty());
+    }
+
+    @Test
+    void testHostileStageResponse() {
+        dialogueSystem.setCurrentStage(RelationshipStage.HOSTILE);
+        String response = dialogueSystem.generateResponse("help");
+        assertNotNull(response);
+        // Should be hostile, not helpful
+        assertFalse(response.contains("I'm here to help!"));
+    }
+
+    @Test
+    void testCuriousStageResponse() {
+        dialogueSystem.setCurrentStage(RelationshipStage.CURIOUS);
+        String response = dialogueSystem.generateResponse("oxygen");
+        assertNotNull(response);
+        assertFalse(response.isEmpty());
+    }
+
+    @Test
+    void testCooperativeStageResponse() {
+        dialogueSystem.setCurrentStage(RelationshipStage.COOPERATIVE);
+        String response = dialogueSystem.generateResponse("help");
+        assertNotNull(response);
+        assertTrue(response.contains("help") || response.contains("Help"));
+    }
 }
