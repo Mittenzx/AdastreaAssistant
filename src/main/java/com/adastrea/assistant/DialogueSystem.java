@@ -11,12 +11,30 @@ public class DialogueSystem {
     private final List<String> greetings;
     private final List<String> companionDialogues;
     private final Random random;
+    private AssistantProfile profile;
 
     public DialogueSystem() {
         this.random = new Random();
         this.greetings = new ArrayList<>();
         this.companionDialogues = new ArrayList<>();
+        this.profile = null;
         initializeDialogues();
+    }
+    
+    /**
+     * Set an assistant profile for personalized dialogue
+     * @param profile The assistant profile to use
+     */
+    public void setProfile(AssistantProfile profile) {
+        this.profile = profile;
+    }
+    
+    /**
+     * Get the current assistant profile
+     * @return The current profile, or null if none is set
+     */
+    public AssistantProfile getProfile() {
+        return profile;
     }
 
     /**
@@ -44,6 +62,11 @@ public class DialogueSystem {
      * @return A greeting message
      */
     public String getGreeting() {
+        // Use profile greeting if available
+        if (profile != null) {
+            return profile.getProfileGreeting();
+        }
+        
         if (greetings.isEmpty()) {
             return "Hello!";
         }
@@ -55,6 +78,14 @@ public class DialogueSystem {
      * @return A companion message
      */
     public String getRandomCompanionDialogue() {
+        // Use profile companion dialogues if available
+        if (profile != null) {
+            List<String> profileDialogues = profile.getProfileCompanionDialogues();
+            if (!profileDialogues.isEmpty()) {
+                return profileDialogues.get(random.nextInt(profileDialogues.size()));
+            }
+        }
+        
         if (companionDialogues.isEmpty()) {
             return "I'm here with you.";
         }

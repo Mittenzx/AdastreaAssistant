@@ -121,4 +121,50 @@ class AIAssistantTest {
         assistant.setAssistantName("NewName");
         assertEquals("NewName", assistant.getAssistantName());
     }
+    
+    @Test
+    void testSetProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        assistant.setProfile(mittenz);
+        
+        assertNotNull(assistant.getProfile());
+        assertEquals(mittenz, assistant.getProfile());
+        assertEquals("Mittenz", assistant.getAssistantName());
+    }
+    
+    @Test
+    void testProfileIntegrationWithDialogueSystem() {
+        MittenzProfile mittenz = new MittenzProfile();
+        assistant.setProfile(mittenz);
+        
+        // The DialogueSystem should also have the profile set
+        assertEquals(mittenz, assistant.getDialogueSystem().getProfile());
+    }
+    
+    @Test
+    void testTeachWithMittenzProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        assistant.setProfile(mittenz);
+        
+        assertEquals(0, mittenz.getSkillLevel());
+        assertFalse(mittenz.hasLearnedSystem("oxygen"));
+        
+        assistant.teach("oxygen");
+        
+        assertTrue(mittenz.hasLearnedSystem("oxygen"));
+        assertTrue(mittenz.getSkillLevel() > 0);
+    }
+    
+    @Test
+    void testTeachMultipleTopicsWithMittenzProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        assistant.setProfile(mittenz);
+        
+        assistant.teach("oxygen");
+        assistant.teach("gravity");
+        assistant.teach("navigation");
+        
+        assertEquals(3, mittenz.getLearnedSystems().size());
+        assertEquals(15, mittenz.getSkillLevel());
+    }
 }
