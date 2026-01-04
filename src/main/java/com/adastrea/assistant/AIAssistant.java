@@ -16,6 +16,7 @@ public class AIAssistant {
     private final TeachingSystem teachingSystem;
     private boolean isEnabled;
     private String assistantName;
+    private AssistantProfile profile;
 
     public AIAssistant() {
         this("Assistant");
@@ -29,6 +30,27 @@ public class AIAssistant {
         this.reminderSystem = new ReminderSystem();
         this.teachingSystem = new TeachingSystem();
         this.isEnabled = true;
+        this.profile = null;
+    }
+    
+    /**
+     * Set the assistant profile for personalized behavior
+     * @param profile The assistant profile to use
+     */
+    public void setProfile(AssistantProfile profile) {
+        this.profile = profile;
+        this.dialogueSystem.setProfile(profile);
+        if (profile != null) {
+            this.assistantName = profile.getName();
+        }
+    }
+    
+    /**
+     * Get the current assistant profile
+     * @return The current profile, or null if none is set
+     */
+    public AssistantProfile getProfile() {
+        return profile;
     }
 
     /**
@@ -71,6 +93,12 @@ public class AIAssistant {
         if (isEnabled) {
             String lesson = teachingSystem.getLesson(topic);
             speak(lesson);
+            
+            // If using Mittenz profile, mark system as learned to improve her skills
+            if (profile instanceof MittenzProfile) {
+                MittenzProfile mittenz = (MittenzProfile) profile;
+                mittenz.learnSystem(topic);
+            }
         }
     }
 
