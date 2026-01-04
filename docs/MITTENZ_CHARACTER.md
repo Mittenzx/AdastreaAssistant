@@ -40,19 +40,25 @@ In the game narrative, the player obtains the chip containing Mittenz from a bla
 
 Mittenz starts at skill level 0 and progresses to 100 as she learns and gains experience.
 
-**Skill Level 0-20: Uncertain Beginner**
+**Skill Level 0-19: Uncertain Beginner**
 - Hesitant and confused
 - Frequently expresses uncertainty
 - Makes self-deprecating comments about her abilities
 - Dialogue reflects fear and confusion about her existence
 
-**Skill Level 20-60: Learning Companion**
+**Skill Level 20-49: Learning Companion**
 - Growing confidence in her abilities
 - Begins to see patterns in systems
 - Expresses gratitude for player's patience
 - More memory fragments surface as she becomes comfortable
 
-**Skill Level 60-100: Capable Partner**
+**Skill Level 50-79: Confident Partner**
+- More confident in processing data
+- Efficient with system operations
+- Reflects on her progress and growth
+- Shows deeper understanding of her capabilities
+
+**Skill Level 80-100: Expert Companion**
 - Confident and efficient
 - Processes information quickly
 - Still maintains emotional authenticity
@@ -84,13 +90,13 @@ Systems that can be learned include:
 
 Mittenz's initial greeting changes dramatically based on her skill level:
 
-**Low Skill (0-20):**
+**Low Skill (0-19):**
 "H-hello? Is someone there? I'm Mittenz... I think. Everything is still so strange. I'm trying to understand these systems, but... I'll do my best to help you!"
 
-**Mid Skill (20-50):**
+**Mid Skill (20-49):**
 "Hey there! I'm Mittenz. I'm getting better at this whole... digital existence thing. I'm here to help - and honestly, having someone to talk to makes this easier."
 
-**High Skill (50-80):**
+**High Skill (50-79):**
 "Welcome back! Mittenz here - I've learned so much since we started. These systems are starting to make sense now. Let's see what we can accomplish together!"
 
 **Expert (80-100):**

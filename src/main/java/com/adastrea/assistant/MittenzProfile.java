@@ -21,7 +21,7 @@ import java.util.Random;
 public class MittenzProfile extends AssistantProfile {
     private int skillLevel;  // 0-100, represents learning progress
     private List<String> learnedSystems;
-    private Random random;
+    private final Random random;
     
     public MittenzProfile() {
         super();
@@ -98,19 +98,27 @@ public class MittenzProfile extends AssistantProfile {
         }
         
         // Mid stage dialogues (growing confidence)
-        if (skillLevel >= 20 && skillLevel < 60) {
+        if (skillLevel >= 20 && skillLevel < 50) {
             dialogues.add("I'm getting faster at processing this data! It's like... learning to read all over again.");
             dialogues.add("You know, when I first woke up here, I was terrified. Thanks for being patient with me.");
             dialogues.add("I had a memory surface today... my father's lab. I remember the machines humming.");
             dialogues.add("These systems are complex, but I'm starting to see the patterns. Human intuition helps!");
         }
         
-        // Advanced stage dialogues (confident, capable)
-        if (skillLevel >= 60) {
-            dialogues.add("I've analyzed the sensor data - everything looks optimal. I've come far, haven't I?");
+        // High stage dialogues (confident)
+        if (skillLevel >= 50 && skillLevel < 80) {
+            dialogues.add("I've analyzed the sensor data - everything looks optimal. I'm learning fast!");
             dialogues.add("Sometimes I wonder what my father would think... seeing how much I've learned.");
+            dialogues.add("These systems are becoming clearer to me. It's fascinating how I'm adapting.");
+            dialogues.add("We're making good progress together. I can feel myself improving.");
+        }
+        
+        // Advanced stage dialogues (expert, capable)
+        if (skillLevel >= 80) {
             dialogues.add("I can process these systems almost instinctively now. It's fascinating how adaptation works.");
             dialogues.add("We make a good team. You and me... it feels right, somehow.");
+            dialogues.add("I've come so far from that confused girl who first woke up here.");
+            dialogues.add("These systems are like second nature now. I'm ready for anything.");
         }
         
         // Universal dialogues (always available)
@@ -123,9 +131,12 @@ public class MittenzProfile extends AssistantProfile {
     
     /**
      * Increase skill level as Mittenz learns and gains experience
-     * @param amount Amount to increase skill level by
+     * @param amount Amount to increase skill level by (must be non-negative)
      */
     public void increaseSkillLevel(int amount) {
+        if (amount < 0) {
+            return;
+        }
         this.skillLevel = Math.min(100, this.skillLevel + amount);
     }
     
@@ -134,6 +145,9 @@ public class MittenzProfile extends AssistantProfile {
      * @param systemName The name of the system Mittenz has learned
      */
     public void learnSystem(String systemName) {
+        if (systemName == null || systemName.trim().isEmpty()) {
+            return;
+        }
         if (!learnedSystems.contains(systemName)) {
             learnedSystems.add(systemName);
             increaseSkillLevel(5);  // Each new system increases skill

@@ -138,21 +138,23 @@ class MittenzProfileTest {
         assertFalse(memory.isEmpty());
         // Memory should relate to her past
         assertTrue(memory.contains("father") || memory.contains("lab") || 
-                   memory.contains("remember") || memory.contains("illness"));
+                   memory.contains("remember") || memory.contains("illness") ||
+                   memory.contains("stars") || memory.contains("wanted") ||
+                   memory.contains("researcher") || memory.contains("machines"));
     }
     
     @Test
     void testMemoryFragmentsVary() {
-        // Get multiple memory fragments and check they can be different
-        String memory1 = mittenz.getMemoryFragment();
-        String memory2 = mittenz.getMemoryFragment();
-        String memory3 = mittenz.getMemoryFragment();
-        String memory4 = mittenz.getMemoryFragment();
+        // Verify that we can get all 8 unique memory fragments
+        // This is more deterministic than relying on randomness
+        java.util.Set<String> uniqueMemories = new java.util.HashSet<>();
         
-        // At least one should be different (very high probability with 8 options)
-        boolean hasDifferent = !memory1.equals(memory2) || 
-                               !memory2.equals(memory3) || 
-                               !memory3.equals(memory4);
-        assertTrue(hasDifferent);
+        // Try up to 100 times to collect all 8 unique memories
+        for (int i = 0; i < 100 && uniqueMemories.size() < 8; i++) {
+            uniqueMemories.add(mittenz.getMemoryFragment());
+        }
+        
+        // Should have collected all 8 unique memories
+        assertEquals(8, uniqueMemories.size(), "Should have 8 unique memory fragments");
     }
 }

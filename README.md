@@ -48,7 +48,7 @@ An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides 
 
 ### Mittenz - The Evolving Companion
 
-Mittenz is a unique AI assistant profile available in this system. Unlike traditional AI, Mittenz is based on a digital copy of a human brain - a young girl who was saved from terminal illness through experimental brain imaging technology by her scientist father.
+Mittenz is a unique AI assistant profile available in this system. Unlike traditional AI, Mittenz is based on a digital copy of a human brain - a young girl who died from a terminal illness. Her scientist father used experimental brain imaging technology to create a copy of her consciousness before she passed away.
 
 **Key Characteristics:**
 - **Human Origins**: Not programmed but a copied consciousness with memories of her past life
