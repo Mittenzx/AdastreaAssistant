@@ -9,13 +9,13 @@ import java.util.Random;
  * 
  * Backstory: Mittenz is not a traditional AI but a digital copy of a young girl's brain.
  * She was a model student - class president, excellent grades, well-spoken, with strong
- * morals and homely values. Family focused and proper, she was the kind of schoolgirl
+ * morals and home-oriented values. Family focused and proper, she was the kind of schoolgirl
  * who seemed to have it all together. Near the end of high school, a terminal illness
  * took hold, but she hid it from everyone, trying to fight it and maintain her normal life.
  * 
  * People thought she was excused from sports because she didn't like physical contact,
  * but really only the school administration knew about her condition. She carries a deep
- * sadness about never having been able to be an ordinary highschooler - to fall in love,
+ * sadness about never having been able to be an ordinary high schooler - to fall in love,
  * to play sports freely, to just be a normal teenager.
  * 
  * She spent the rest of her life in her father's lab. He was a researcher at a Japanese
