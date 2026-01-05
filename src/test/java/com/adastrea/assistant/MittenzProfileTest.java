@@ -150,21 +150,24 @@ class MittenzProfileTest {
         assertTrue(memory.contains("father") || memory.contains("lab") || 
                    memory.contains("remember") || memory.contains("illness") ||
                    memory.contains("stars") || memory.contains("wanted") ||
-                   memory.contains("researcher") || memory.contains("machines"));
+                   memory.contains("researcher") || memory.contains("machines") ||
+                   memory.contains("class") || memory.contains("school") ||
+                   memory.contains("love") || memory.contains("data") ||
+                   memory.contains("chip") || memory.contains("uniform"));
     }
     
     @Test
     void testMemoryFragmentsVary() {
-        // Verify that we can get all 8 unique memory fragments
+        // Verify that we can get all 20 unique memory fragments
         // This is more deterministic than relying on randomness
         java.util.Set<String> uniqueMemories = new java.util.HashSet<>();
         
-        // Try up to 100 times to collect all 8 unique memories
-        for (int i = 0; i < 100 && uniqueMemories.size() < 8; i++) {
+        // Try up to 200 times to collect all 20 unique memories
+        for (int i = 0; i < 200 && uniqueMemories.size() < 20; i++) {
             uniqueMemories.add(mittenz.getMemoryFragment());
         }
         
-        // Should have collected all 8 unique memories
-        assertEquals(8, uniqueMemories.size(), "Should have 8 unique memory fragments");
+        // Should have collected all 20 unique memories
+        assertEquals(20, uniqueMemories.size(), "Should have 20 unique memory fragments");
     }
 }

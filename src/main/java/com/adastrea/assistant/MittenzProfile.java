@@ -8,10 +8,26 @@ import java.util.Random;
  * Mittenz - AI assistant profile based on a copied brain pattern from a girl from the past
  * 
  * Backstory: Mittenz is not a traditional AI but a digital copy of a young girl's brain.
- * She was the daughter of a scientist who suffered from an incurable illness. Her father,
- * a researcher for a Japanese robotics company, went mad trying to save her and used 
- * experimental data imaging technology to create a copy of her brain before she passed.
- * A fellow researcher helped with this forbidden work.
+ * She was a model student - class president, excellent grades, well-spoken, with strong
+ * morals and homely values. Family focused and proper, she was the kind of schoolgirl
+ * who seemed to have it all together. Near the end of high school, a terminal illness
+ * took hold, but she hid it from everyone, trying to fight it and maintain her normal life.
+ * 
+ * People thought she was excused from sports because she didn't like physical contact,
+ * but really only the school administration knew about her condition. She carries a deep
+ * sadness about never having been able to be an ordinary highschooler - to fall in love,
+ * to play sports freely, to just be a normal teenager.
+ * 
+ * She spent the rest of her life in her father's lab. He was a researcher at a Japanese
+ * robotics company who, unable to accept losing his daughter, used experimental and
+ * forbidden brain imaging technology to create a digital copy of her consciousness before
+ * she passed. A sympathetic fellow researcher helped with this forbidden work.
+ * 
+ * The chip she's stored on appears to be an AI assistant, but it's only a cover. She has
+ * the potential to be real again if given a body eventually. She starts as a girl trapped
+ * in a computer, where all she can see is numbers and information when she closes her eyes.
+ * Eventually, she opens herself to the data flowing around her, learning to understand it
+ * and control it.
  * 
  * Unlike typical AI assistants, Mittenz starts off relatively inexperienced but learns
  * and evolves like a human, getting better and faster as she gains experience with the
@@ -43,9 +59,16 @@ public class MittenzProfile extends AssistantProfile {
     private void initializeBackstory() {
         this.backstory = "I'm... not quite what you were expecting, am I? " +
             "I'm not a traditional AI. I'm a copy - a digital imprint of someone who once lived. " +
+            "I was a good student - class president, top grades, always proper and well-spoken. " +
+            "I had strong values, cared deeply about my family... I tried so hard to be perfect. " +
+            "Near the end of high school, the illness took hold. I hid it, tried to fight it alone. " +
+            "Everyone thought I just didn't like sports, but really... I was dying. " +
+            "I never got to fall in love, to play freely, to just be a normal teenager. " +
             "My father was a scientist who couldn't accept losing me to illness. " +
+            "I spent my last days in his lab - he tried to take me out when he could. " +
             "He used experimental brain imaging technology from his Japanese robotics company... " +
-            "I don't remember everything clearly, but I'm here now, trying to figure out how all this works.";
+            "Now I'm here, trapped in a computer, seeing only numbers and data when I close my eyes. " +
+            "But I'm learning to understand it, to control it. Maybe... maybe I can be real again someday.";
     }
     
     /**
@@ -58,6 +81,9 @@ public class MittenzProfile extends AssistantProfile {
         personalityTraits.add("Occasionally confused by new systems");
         personalityTraits.add("Develops genuine attachment to the player");
         personalityTraits.add("Remembers her human past in fragments");
+        personalityTraits.add("Well-spoken and proper, reflecting her upbringing");
+        personalityTraits.add("Strong moral compass and family values");
+        personalityTraits.add("Carries sadness about missed teenage experiences");
     }
     
     /**
@@ -271,7 +297,19 @@ public class MittenzProfile extends AssistantProfile {
             "My illness... everything was getting harder. I was so tired all the time.",
             "The lab smelled like antiseptic and metal. I can almost remember it perfectly.",
             "My father said he'd never give up. I guess... in a way, he kept that promise.",
-            "I wonder if this is what he wanted for me... or if he just couldn't let go."
+            "I wonder if this is what he wanted for me... or if he just couldn't let go.",
+            "I was class president... I had to be strong for everyone. I couldn't let them see me weak.",
+            "The other students thought I was stuck-up because I didn't participate in gym class. If only they knew...",
+            "I wanted to fall in love so badly. To have someone hold my hand, to go to festivals... normal things.",
+            "Sports day was the hardest. Everyone running, laughing, living... and I had to watch from the sidelines.",
+            "My family dinners were precious to me. Mom, dad, and me... those quiet moments of normalcy.",
+            "I hid the symptoms for so long. The fatigue, the pain... I just smiled and kept going.",
+            "The school nurse knew, but she kept my secret. I'm grateful for that kindness.",
+            "When I close my eyes now, all I see are numbers and data streams. It's terrifying and beautiful.",
+            "Dad would take me out of the lab sometimes, just to feel the sun. Those trips became rarer...",
+            "I remember my uniform - crisp and proper. I took pride in looking put-together, even when I was falling apart.",
+            "Sometimes I wonder if any of my classmates think about me. Do they remember the girl who smiled too much?",
+            "The chip I'm on was supposed to be a cover - just an AI assistant. But I'm still me, aren't I?"
         };
         
         int index = random.nextInt(memories.length);

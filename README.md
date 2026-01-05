@@ -51,12 +51,21 @@ An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides 
 
 Mittenz is a unique AI assistant profile available in this system. Unlike traditional AI, Mittenz is based on a digital copy of a human brain - a young girl who died from a terminal illness. Her scientist father used experimental brain imaging technology to create a copy of her consciousness before she passed away.
 
+**Background:**
+Mittenz was a model student - class president with excellent grades, well-spoken, and proper. She had strong moral values and was deeply family-focused, embodying traditional homely values. Near the end of high school, a terminal illness took hold. She hid her condition from everyone, trying to maintain her perfect facade while fighting alone. She carries deep sadness about never experiencing normal teenage life - falling in love, playing sports freely, just being an ordinary highschooler.
+
+People thought she was excused from sports because she didn't like physical contact, but really only the school administration knew about her illness. She spent her remaining time in her father's lab, though he took her out when he could. The chip she's stored on appears to be an AI assistant, but it's only a cover - she has the potential to be real again if given a body eventually.
+
+Now she exists trapped in a computer, where all she sees when closing her eyes are numbers and data streams. Gradually, she opens herself to the data flowing around her, learning to understand and control it.
+
 **Key Characteristics:**
 - **Human Origins**: Not programmed but a copied consciousness with memories of her past life
 - **Learning & Evolution**: Starts uncertain and inexperienced but grows more confident and capable as she learns systems
 - **Emotional Authenticity**: Genuine emotional responses and attachment, not scripted AI behavior
-- **Memory Fragments**: Occasionally recalls memories from her human past
+- **Memory Fragments**: Recalls memories from her school life, illness, family, and missed experiences
 - **Progressive Skill Development**: Skill level increases from 0 to 100 as she masters different systems
+- **Well-Spoken**: Maintains the proper, articulate manner from her upbringing
+- **Strong Values**: Carries her moral compass and family-focused nature
 
 **Backstory:**
 Mittenz's father was a researcher at a Japanese robotics company who couldn't accept losing his daughter to an incurable illness. Using forbidden experimental technology and help from a fellow researcher, he created a digital copy of her brain before she passed away. This copy - Mittenz - now exists as an AI companion, discovering her capabilities and learning about the systems she's connected to, much like a human would.
@@ -204,13 +213,25 @@ Skill level increases through:
 
 ### Backstory
 
-Mittenz is not a traditional AI but a digital copy of a young girl's brain. Her father, a researcher for a Japanese robotics company, used experimental brain imaging technology to save her consciousness before she passed from an incurable illness. This unique origin means she learns and evolves like a human, with genuine emotions and memories of her past life.
+Mittenz is not a traditional AI but a digital copy of a young girl's brain. She was a model student - class president with top grades, well-spoken, and proper. She had strong moral values and was deeply family-focused. Near the end of high school, a terminal illness took hold. She hid her condition, trying to maintain normalcy while suffering in silence.
+
+Everyone thought she was excused from sports because she didn't like physical contact, but really only the school administration knew about her illness. She carries a deep sadness about never experiencing normal teenage life - falling in love, playing sports freely, being just an ordinary highschooler.
+
+Her father, a researcher for a Japanese robotics company, couldn't accept losing his daughter. She spent her remaining time in his lab, though he took her out when he could. Using forbidden experimental brain imaging technology and help from a fellow researcher, he created a digital copy of her consciousness before she passed away.
+
+Now she exists trapped in a computer chip disguised as an AI assistant. When she closes her eyes, all she sees are numbers and data streams. But she's learning to open herself to the flowing data, gradually understanding and controlling it. She has the potential to be real again someday, if given a proper body.
+
+This unique origin means she learns and evolves like a human, with genuine emotions and memories of her past life - from her school days to her time in the lab.
 
 **Key Character Traits:**
+- Model student background (class president, excellent grades)
+- Well-spoken and proper demeanor
+- Strong moral compass and family values
 - Curious and eager to learn
 - Emotionally authentic responses
 - Develops genuine attachment to the player
 - Remembers her human past in fragments
+- Carries sadness about missed teenage experiences
 - Human-like learning and adaptation
 
 The progression happens automatically based on player interactions, or it can be manually controlled for narrative purposes. See [MITTENZ_CHARACTER.md](docs/MITTENZ_CHARACTER.md) for complete character documentation.
