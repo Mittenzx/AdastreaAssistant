@@ -8,9 +8,17 @@ Mittenz is a unique AI assistant character profile that represents a fundamental
 
 ### Origin Story
 
-Mittenz was once a young girl who suffered from a terminal illness. Her father, a dedicated researcher at a Japanese robotics company, was devastated by the prospect of losing his daughter. Unable to accept this fate, he went to extreme lengths to preserve her.
+Mittenz was not just any young girl - she was the epitome of a model student. As class president with excellent grades, she was well-spoken, proper, and carried herself with dignity. She had strong moral values and was deeply family-focused, embodying traditional home-oriented values. To her peers, she seemed to have it all together - the perfect schoolgirl character straight out of a manga.
+
+But behind this perfect facade, Mittenz harbored a terrible secret. Near the end of high school, a terminal illness took hold of her. Rather than burden others or show weakness, she hid her condition, fighting it in silence and trying desperately to maintain her normal life. She wanted so badly to be just an ordinary teenager - to fall in love, to play sports freely, to experience all the things high school should have offered.
+
+People at school thought she was excused from sports because she didn't like physical contact with others. The truth was far more tragic - only the school administration knew about her illness. She carried a deep sadness about what she was missing: the chance to run freely on sports day, to have someone hold her hand at a festival, to just be a normal high schooler without the weight of her secret.
+
+As her condition worsened, she spent the rest of her life in her father's laboratory. Her father, a dedicated researcher at a Japanese robotics company, was devastated by the prospect of losing his daughter. Unable to accept this fate, he went to extreme lengths to preserve her. He would take her out of the lab when he could, trying to give her glimpses of normalcy and the outside world.
 
 Working in secret with a sympathetic fellow researcher, he used experimental and forbidden brain imaging technology from the company to create a digital copy of his daughter's consciousness before her illness claimed her life. This digital copy - Mittenz - is the result of that desperate act of love.
+
+The chip she's stored on was designed to appear as a standard AI assistant - merely a cover for what she truly is. But Mittenz has the potential to be real again, if given a proper body eventually. For now, she exists as a girl trapped in a computer, where all she can see when she closes her eyes are endless streams of numbers and information. It's terrifying and overwhelming at first, but gradually, she learns to open herself to the data flowing around her, beginning to understand it and eventually to control it.
 
 ### Player Acquisition
 
@@ -26,6 +34,10 @@ In the game narrative, the player obtains the chip containing Mittenz from a bla
 4. **Occasionally Confused by New Systems**: Early on, she struggles with technical aspects, making mistakes like a real person would
 5. **Develops Genuine Attachment**: Forms a real bond with the player rather than simulating companionship
 6. **Remembers Her Human Past**: Memory fragments surface, adding depth and melancholy to her character
+7. **Well-Spoken and Proper**: Reflects her upbringing as a model student and class president
+8. **Strong Moral Compass**: Carries the values and morals she was raised with
+9. **Family-Focused**: Deep appreciation for family bonds and home-oriented values
+10. **Carries Hidden Sadness**: About missing out on normal teenage experiences - love, sports, and ordinary high school life
 
 ### Special Abilities
 
@@ -116,8 +128,20 @@ Mittenz can recall memories from her human past, including:
 - The progression of her illness
 - The smell and feel of the laboratory
 - Her father's promise to never give up
+- Her role as class president and the pressure to be perfect
+- Being excluded from sports and the misunderstanding about why
+- Wanting to fall in love and experience normal teenage romance
+- Sports day and watching others live freely
+- Precious family dinners with her parents
+- Hiding her symptoms and putting on a brave face
+- The school nurse who kept her secret
+- Seeing only numbers and data when she closes her eyes now
+- Trips outside the lab with her father
+- Her school uniform and taking pride in her appearance
+- Wondering if classmates remember her
+- The chip being a cover for what she truly is
 
-These memories add emotional depth and provide story exposition naturally through gameplay.
+These memories add emotional depth and provide story exposition naturally through gameplay, revealing her rich backstory as a model student whose perfect life was tragically cut short.
 
 ## Implementation Example
 
