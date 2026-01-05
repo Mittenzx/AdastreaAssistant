@@ -130,5 +130,37 @@ class DialogueSystemTest {
         assertNotNull(response);
         // Verify it's a helpful, cooperative response, not hostile
         assertTrue(response.contains("I'm here to help!"));
+    
+    @Test
+    void testSetProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        dialogueSystem.setProfile(mittenz);
+        
+        assertNotNull(dialogueSystem.getProfile());
+        assertEquals(mittenz, dialogueSystem.getProfile());
+    }
+    
+    @Test
+    void testGreetingWithProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        dialogueSystem.setProfile(mittenz);
+        
+        String greeting = dialogueSystem.getGreeting();
+        assertNotNull(greeting);
+        assertFalse(greeting.isEmpty());
+        // Should use profile greeting
+        assertEquals(mittenz.getProfileGreeting(), greeting);
+    }
+    
+    @Test
+    void testCompanionDialogueWithProfile() {
+        MittenzProfile mittenz = new MittenzProfile();
+        dialogueSystem.setProfile(mittenz);
+        
+        String dialogue = dialogueSystem.getRandomCompanionDialogue();
+        assertNotNull(dialogue);
+        assertFalse(dialogue.isEmpty());
+        // Should be one of Mittenz's dialogues
+        assertTrue(mittenz.getProfileCompanionDialogues().contains(dialogue));
     }
 }

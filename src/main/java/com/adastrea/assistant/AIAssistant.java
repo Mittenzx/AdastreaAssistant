@@ -96,6 +96,12 @@ public class AIAssistant {
         if (isEnabled) {
             String lesson = teachingSystem.getLesson(topic);
             speak(lesson);
+            
+            // If using Mittenz profile, mark system as learned to improve her skills
+            if (profile instanceof MittenzProfile) {
+                MittenzProfile mittenz = (MittenzProfile) profile;
+                mittenz.learnSystem(topic);
+            }
         }
     }
 

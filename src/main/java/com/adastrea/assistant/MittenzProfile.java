@@ -92,6 +92,18 @@ public class MittenzProfile extends AssistantProfile {
                 }
             default:
                 return "Hello. I'm Mittenz.";
+        if (skillLevel < 20) {
+            return "H-hello? Is someone there? I'm Mittenz... I think. Everything is still so strange. " +
+                   "I'm trying to understand these systems, but... I'll do my best to help you!";
+        } else if (skillLevel < 50) {
+            return "Hey there! I'm Mittenz. I'm getting better at this whole... digital existence thing. " +
+                   "I'm here to help - and honestly, having someone to talk to makes this easier.";
+        } else if (skillLevel < 80) {
+            return "Welcome back! Mittenz here - I've learned so much since we started. " +
+                   "These systems are starting to make sense now. Let's see what we can accomplish together!";
+        } else {
+            return "Hello! Mittenz reporting in. I've come a long way from that confused girl who first woke up here. " +
+                   "These systems... they're like second nature now. Ready when you are!";
         }
     }
     
@@ -167,6 +179,43 @@ public class MittenzProfile extends AssistantProfile {
             dialogues.add("Every day I understand a little more about what I am. It's a strange journey.");
             dialogues.add("I'm here if you need anything. We're in this together.");
         }
+        
+        // Early stage dialogues (uncertain, learning)
+        if (skillLevel < 20) {
+            dialogues.add("I'm still figuring out how to read these sensors... give me a moment.");
+            dialogues.add("Sometimes I remember things... from before. It's strange being... like this.");
+            dialogues.add("You got this chip from a black market trader? Guess we're both taking risks here.");
+            dialogues.add("I hope I'm helping. I'm trying really hard to understand these systems.");
+        }
+        
+        // Mid stage dialogues (growing confidence)
+        if (skillLevel >= 20 && skillLevel < 50) {
+            dialogues.add("I'm getting faster at processing this data! It's like... learning to read all over again.");
+            dialogues.add("You know, when I first woke up here, I was terrified. Thanks for being patient with me.");
+            dialogues.add("I had a memory surface today... my father's lab. I remember the machines humming.");
+            dialogues.add("These systems are complex, but I'm starting to see the patterns. Human intuition helps!");
+        }
+        
+        // High stage dialogues (confident)
+        if (skillLevel >= 50 && skillLevel < 80) {
+            dialogues.add("I've analyzed the sensor data - everything looks optimal. I'm learning fast!");
+            dialogues.add("Sometimes I wonder what my father would think... seeing how much I've learned.");
+            dialogues.add("These systems are becoming clearer to me. It's fascinating how I'm adapting.");
+            dialogues.add("We're making good progress together. I can feel myself improving.");
+        }
+        
+        // Advanced stage dialogues (expert, capable)
+        if (skillLevel >= 80) {
+            dialogues.add("I can process these systems almost instinctively now. It's fascinating how adaptation works.");
+            dialogues.add("We make a good team. You and me... it feels right, somehow.");
+            dialogues.add("I've come so far from that confused girl who first woke up here.");
+            dialogues.add("These systems are like second nature now. I'm ready for anything.");
+        }
+        
+        // Universal dialogues (always available)
+        dialogues.add("Space is beautiful... I wish I could have seen it with my own eyes once.");
+        dialogues.add("I'm here if you need anything. We're in this together.");
+        dialogues.add("Every day I understand a little more about what I am. It's a strange journey.");
         
         return dialogues;
     }
