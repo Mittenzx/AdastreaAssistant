@@ -193,6 +193,7 @@ class AIAssistantTest {
         }
         assertEquals(RelationshipStage.COOPERATIVE, assistant.getRelationshipStage());
         assertEquals(0, assistant.getInteractionCount()); // Counter resets after stage change
+    }
     
     @Test
     void testSetProfile() {

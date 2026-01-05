@@ -130,6 +130,7 @@ class DialogueSystemTest {
         assertNotNull(response);
         // Verify it's a helpful, cooperative response, not hostile
         assertTrue(response.contains("I'm here to help!"));
+    }
     
     @Test
     void testSetProfile() {

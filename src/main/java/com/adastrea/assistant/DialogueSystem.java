@@ -47,22 +47,6 @@ public class DialogueSystem {
     public AssistantProfile getProfile() {
         return profile;
     }
-    
-    /**
-     * Set an assistant profile for personalized dialogue
-     * @param profile The assistant profile to use
-     */
-    public void setProfile(AssistantProfile profile) {
-        this.profile = profile;
-    }
-    
-    /**
-     * Get the current assistant profile
-     * @return The current profile, or null if none is set
-     */
-    public AssistantProfile getProfile() {
-        return profile;
-    }
 
     /**
      * Initialize default dialogues (for COOPERATIVE stage)
@@ -169,8 +153,6 @@ public class DialogueSystem {
                 return "I'm here with you.";
             }
             return companionDialogues.get(random.nextInt(companionDialogues.size()));
-        if (companionDialogues.isEmpty()) {
-            return "I'm here with you.";
         }
         return dialogues.get(random.nextInt(dialogues.size()));
     }

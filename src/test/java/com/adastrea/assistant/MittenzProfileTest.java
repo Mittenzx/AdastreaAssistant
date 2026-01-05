@@ -67,18 +67,6 @@ class MittenzProfileTest {
         assertNotEquals(greetingHostile, greetingCuriousLow);
         assertNotEquals(greetingCuriousLow, greetingCoopMid);
         assertNotEquals(greetingCoopMid, greetingCoopHigh);
-        String greetingLow = mittenz.getProfileGreeting();
-        
-        // Increase skill level significantly
-        mittenz.increaseSkillLevel(60);
-        String greetingMid = mittenz.getProfileGreeting();
-        
-        mittenz.increaseSkillLevel(40);
-        String greetingHigh = mittenz.getProfileGreeting();
-        
-        // Greetings should be different at different skill levels
-        assertNotEquals(greetingLow, greetingMid);
-        assertNotEquals(greetingMid, greetingHigh);
     }
     
     @Test

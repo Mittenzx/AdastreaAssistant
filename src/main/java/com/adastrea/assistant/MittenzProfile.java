@@ -92,18 +92,6 @@ public class MittenzProfile extends AssistantProfile {
                 }
             default:
                 return "Hello. I'm Mittenz.";
-        if (skillLevel < 20) {
-            return "H-hello? Is someone there? I'm Mittenz... I think. Everything is still so strange. " +
-                   "I'm trying to understand these systems, but... I'll do my best to help you!";
-        } else if (skillLevel < 50) {
-            return "Hey there! I'm Mittenz. I'm getting better at this whole... digital existence thing. " +
-                   "I'm here to help - and honestly, having someone to talk to makes this easier.";
-        } else if (skillLevel < 80) {
-            return "Welcome back! Mittenz here - I've learned so much since we started. " +
-                   "These systems are starting to make sense now. Let's see what we can accomplish together!";
-        } else {
-            return "Hello! Mittenz reporting in. I've come a long way from that confused girl who first woke up here. " +
-                   "These systems... they're like second nature now. Ready when you are!";
         }
     }
     
