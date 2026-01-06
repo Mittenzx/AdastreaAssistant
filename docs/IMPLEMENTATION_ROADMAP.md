@@ -657,7 +657,6 @@ tts.tts_to_file(text="The stars sure are beautiful today.", file_path="mittenz_v
 ```java
 // Java integration via Python subprocess
 public class CoquiTTSAudioManager extends AudioManager {
-    private ProcessBuilder pythonProcess;
     
     @Override
     public void playVoice(String message) {
@@ -1427,13 +1426,14 @@ def main():
                        help='TTS model name')
     parser.add_argument('--output', required=True, help='Output audio file path')
     parser.add_argument('--speed', type=float, default=1.0, help='Speech speed (0.5-2.0)')
+    parser.add_argument('--gpu', action='store_true', help='Use GPU acceleration if available')
     
     args = parser.parse_args()
     
     try:
         # Initialize TTS model
         print(f"Loading model: {args.model}", file=sys.stderr)
-        tts = TTS(model_name=args.model, progress_bar=False, gpu=False)
+        tts = TTS(model_name=args.model, progress_bar=False, gpu=args.gpu)
         
         # Generate speech
         print(f"Generating speech for: {args.text[:50]}...", file=sys.stderr)
@@ -1560,10 +1560,23 @@ public class CoquiTTSAudioManager extends AudioManager {
     /**
      * Override this method to implement actual audio playback
      * For now, just confirms generation
+     * 
+     * Example implementations:
+     * - Java Sound API: Use AudioSystem.getClip() and Clip.open()
+     * - Minecraft: Use SoundManager.play() with custom SoundEvent
+     * - javax.sound.sampled for desktop Java applications
      */
     protected void playAudioFile(File audioFile) {
         System.out.println("[AUDIO] Generated and ready to play: " + audioFile.getAbsolutePath());
-        // TODO: Implement actual audio playback using Java Sound API or Minecraft's sound system
+        
+        // Example for Java Sound API (desktop applications):
+        // try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile)) {
+        //     Clip clip = AudioSystem.getClip();
+        //     clip.open(audioStream);
+        //     clip.start();
+        // } catch (Exception e) {
+        //     System.err.println("Audio playback error: " + e.getMessage());
+        // }
     }
     
     /**
@@ -1631,11 +1644,22 @@ public class TTSTestDemo {
 
 **Run the test:**
 ```bash
-# Compile
-./gradlew build
+# Note: This assumes Gradle is configured with the 'application' plugin
+# If your build.gradle doesn't have this setup, you may need to add:
+# plugins {
+#     id 'application'
+# }
+# application {
+#     mainClass = 'com.adastrea.assistant.TTSTestDemo'
+# }
 
-# Run test (after implementing the necessary files)
+# Then compile and run:
+./gradlew build
 ./gradlew run -PmainClass=com.adastrea.assistant.TTSTestDemo
+
+# Alternative: Run directly with java after building
+./gradlew build
+java -cp build/libs/AdastreaAssistant-1.0.0.jar com.adastrea.assistant.TTSTestDemo
 ```
 
 #### Step 5: Validate and Iterate (Day 4-5)
