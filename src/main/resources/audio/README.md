@@ -193,28 +193,28 @@ Audio files for user interface interactions:
 AudioManager audioManager = new AudioManager();
 
 // Preload VOICE samples (numbered files - these have actual speech!)
-audioManager.preloadAudio("greeting", "audio/greetings/greeting_initial.wav");
-audioManager.preloadAudio("hostile1", "audio/dialogue/mittenz_hostile_01.wav");
-audioManager.preloadAudio("hostile2", "audio/dialogue/mittenz_hostile_02.wav");
-audioManager.preloadAudio("curious1", "audio/dialogue/mittenz_curious_01.wav");
-audioManager.preloadAudio("cooperative1", "audio/dialogue/mittenz_cooperative_01.wav");
-audioManager.preloadAudio("reminder", "audio/notifications/reminder_01.wav");
-audioManager.preloadAudio("alert", "audio/notifications/alert_oxygen.wav");
+audioManager.preloadAudio("greeting_initial", "audio/greetings/greeting_initial.wav");
+audioManager.preloadAudio("mittenz_hostile_01", "audio/dialogue/mittenz_hostile_01.wav");
+audioManager.preloadAudio("mittenz_hostile_02", "audio/dialogue/mittenz_hostile_02.wav");
+audioManager.preloadAudio("mittenz_curious_01", "audio/dialogue/mittenz_curious_01.wav");
+audioManager.preloadAudio("mittenz_cooperative_01", "audio/dialogue/mittenz_cooperative_01.wav");
+audioManager.preloadAudio("reminder_01", "audio/notifications/reminder_01.wav");
+audioManager.preloadAudio("alert_oxygen", "audio/notifications/alert_oxygen.wav");
 
 // Play voice samples
-audioManager.playSoundEffect("greeting");  // Mittenz says hello!
-audioManager.playSoundEffect("hostile1");  // Mittenz angry dialogue
+audioManager.playSoundEffect("greeting_initial");  // Mittenz says hello!
+audioManager.playSoundEffect("mittenz_hostile_01");  // "Who the hell are you?"
 ```
 
 ### Using Tone-Based Samples (Legacy)
 
 ```java
 // Preload tone-based audio (simple beeps - no speech)
-audioManager.preloadAudio("welcome_tone", "audio/greetings/welcome.wav");
-audioManager.preloadAudio("click", "audio/sounds/button_click.wav");
+audioManager.preloadAudio("welcome", "audio/greetings/welcome.wav");
+audioManager.preloadAudio("button_click", "audio/sounds/button_click.wav");
 
 // Play tone
-audioManager.playSoundEffect("click");
+audioManager.playSoundEffect("button_click");
 ```
 
 ### Integration with Minecraft
@@ -304,11 +304,7 @@ The voice samples included are **TTS-generated using espeak**, providing actual 
 The tone-based files (without numbers) are simple musical tones and chords. These are kept for:
 - Basic audio system testing
 - UI sound effects (clicks, beeps)
-4. **Implement voice modulation**: Adjust pitch/tone based on:
-   - Relationship stage (hostile = harsh, cooperative = warm)
-   - Skill level (0-100)
-   - Emotional context
-5. **Add ambient sounds**: Background audio for immersion
+- Backwards compatibility
 
 ## Future Enhancements
 
