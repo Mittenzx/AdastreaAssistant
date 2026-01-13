@@ -23,3 +23,18 @@ Thumbs.db
 !gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+tts-human-env/
+*.egg-info/
+dist/
+build/
+
+# TTS temporary files
+*.wav.tmp
+temp_audio.wav

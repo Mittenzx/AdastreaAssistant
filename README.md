@@ -6,6 +6,8 @@ A voice assistant for game integration, inspired by successful implementations i
 
 - **[Voice Assistant Research](VOICE_ASSISTANT_RESEARCH.md)**: Comprehensive research on game voice assistants, including Warframe's Cephalon system, voice synthesis technologies, and implementation patterns
 - **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)**: Phased development plan with technology recommendations and success metrics
+- **[Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md)** ⭐ **NEW**: Complete 10-week plan to make Mittenz's voice sound genuinely human with emotional expression
+- **[Quick Start: Human Audio](docs/QUICKSTART_HUMAN_AUDIO.md)**: Get started with human-like audio generation in 5-10 minutes
 
 ## Research Highlights
 
@@ -26,11 +28,39 @@ This project is informed by research into industry-leading voice assistants:
 
 ## Getting Started
 
+### For Human-like Audio Generation 🎙️ ⭐ **NEW**
+
+Want to make Mittenz sound genuinely human? Start here:
+
+1. **Quick Start** (5-10 minutes): [Quick Start Guide](docs/QUICKSTART_HUMAN_AUDIO.md)
+2. **Full Plan** (10 weeks): [Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md)
+3. **Technical Details**: [Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Generate your first human-like audio
+python3 scripts/tts_generate_human.py \
+  --text "Hello, I'm Mittenz!" \
+  --emotion cooperative \
+  --output test.wav
+
+# Listen to the result!
+aplay test.wav  # Linux
+# or: afplay test.wav  # Mac
+# or: start test.wav  # Windows
+```
+
+### For General Development
+
 See the [Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md) for development phases and next steps.
 
 ## Project Status
 
-Currently in research and planning phase. Implementation will follow the phased approach outlined in the roadmap documentation.
+**Audio System**: 🎯 **Active Development** - Human-like voice generation system ready for implementation (see [Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md))
+
+**Overall**: Research and planning phase complete. Implementation following the phased approach outlined in the roadmap documentation.
 An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides companionship, teaching, and reminders to players during their space exploration adventures.
 
 ## Features
