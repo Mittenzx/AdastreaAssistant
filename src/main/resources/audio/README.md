@@ -1,8 +1,24 @@
 # Sample Audio Files for AdastreaAssistant
 
-This directory contains sample audio files to demonstrate the audio capabilities of the AdastreaAssistant system. 
+This directory contains sample audio files to demonstrate the audio capabilities of the AdastreaAssistant system.
 
-**Important Note:** These are **tone-based** placeholder audio files (synthesized musical tones and chords), **not voice recordings**. They are intended for testing and development purposes only. For production use, replace these with actual voice recordings from voice actors or text-to-speech (TTS) generated speech.
+## Audio Types Included
+
+This directory now contains **TWO types** of audio samples:
+
+### 1. **Voice Samples** (TTS-Generated Speech) ✨ NEW
+- **19 voice samples** featuring Mittenz speaking actual dialogue
+- Generated using espeak text-to-speech engine
+- Female voice with young characteristics (pitch-adjusted)
+- Dialogue from all three relationship stages (Hostile, Curious, Cooperative)
+- **File naming:** `greeting_*.wav`, `mittenz_*_01.wav`, `*_01.wav` etc.
+
+### 2. **Tone-Based Placeholders** (Musical Tones)
+- **17 tone-based** files (synthesized musical tones and chords)
+- Simple beeps and chords for basic audio testing
+- **File naming:** `welcome.wav`, `hello.wav`, `mittenz_hostile.wav` (without numbers)
+
+**Recommendation:** Use the **voice samples** (numbered files like `mittenz_hostile_01.wav`) to hear Mittenz speak! The tone-based files are kept for backwards compatibility and simple audio system testing.
 
 ## Directory Structure
 
@@ -14,7 +30,52 @@ audio/
 └── sounds/            # UI interaction sounds
 ```
 
-## Audio File Categories
+## 🎙️ Voice Samples (Mittenz Speaking!)
+
+These TTS-generated voice samples let you **hear Mittenz actually speak**! Generated using espeak with female voice characteristics tuned for a young, well-spoken character.
+
+### Greetings - Voice Samples
+
+- **`greeting_initial.wav`** - *"Hello there! I'm here to help you on your space adventure."*
+  - First meeting greeting
+  
+- **`greeting_startup.wav`** - *"System initializing. Mittenz here, ready to assist."*
+  - System initialization message
+  
+- **`greeting_welcome.wav`** - *"Welcome back! Let's continue our journey through the stars."*
+  - Returning player greeting
+
+### Dialogue - Voice Samples by Relationship Stage
+
+#### HOSTILE Stage (Angry, Demanding)
+- **`mittenz_hostile_01.wav`** - *"Who the hell are you? Where is my dad?"*
+- **`mittenz_hostile_02.wav`** - *"You can't do this to me! Do you know who I am?"*
+- **`mittenz_hostile_03.wav`** - *"I demand you tell me what's going on right now!"*
+
+#### CURIOUS Stage (Questioning, Interested)
+- **`mittenz_curious_01.wav`** - *"What does this do? I've never seen anything like this before."*
+- **`mittenz_curious_02.wav`** - *"Wow, I can see all the ship's systems from here."*
+- **`mittenz_curious_03.wav`** - *"I'm starting to see things differently now."*
+
+#### COOPERATIVE Stage (Friendly, Collaborative)
+- **`mittenz_cooperative_01.wav`** - *"We need to check the oxygen levels."*
+- **`mittenz_cooperative_02.wav`** - *"Let's work together on this one."*
+- **`mittenz_cooperative_03.wav`** - *"We make a pretty good team, don't we?"*
+
+#### Companion Messages
+- **`companion_message_01.wav`** - *"The stars sure are beautiful today, aren't they?"*
+- **`companion_message_02.wav`** - *"I'm here if you need any guidance or just want to chat."*
+- **`acknowledgment.wav`** - *"Understood. I'll take care of that."*
+
+### Notifications - Voice Samples
+- **`reminder_01.wav`** - *"Reminder: It's time to check your fuel levels."*
+- **`alert_oxygen.wav`** - *"Warning! Oxygen levels are getting low!"*
+- **`teaching_intro.wav`** - *"Let me teach you about this system."*
+- **`success.wav`** - *"Great job! We did it!"*
+
+---
+
+## 🎵 Tone-Based Samples (Original)
 
 ### Greetings (`greetings/`)
 
@@ -105,31 +166,54 @@ Audio files for user interface interactions:
 
 ## Technical Specifications
 
-All audio files are in WAV format with the following specifications:
+### Voice Samples (TTS-Generated)
 - **Sample Rate**: 44100 Hz (CD quality)
 - **Bit Depth**: 16-bit
 - **Channels**: Mono (1 channel)
-- **Format**: PCM uncompressed
+- **Format**: WAV PCM uncompressed
+- **Voice Engine**: espeak (en-us+f3)
+- **Voice Characteristics**: Young female voice with adjusted pitch (55-62) and speed (155-175 WPM)
+- **Total Voice Files**: 19 files (~3-4 MB)
+
+### Tone-Based Samples (Musical Tones)
+- **Sample Rate**: 44100 Hz (CD quality)
+- **Bit Depth**: 16-bit
+- **Channels**: Mono (1 channel)
+- **Format**: WAV PCM uncompressed
+- **Generation**: Synthesized sine waves and chords
+- **Total Tone Files**: 17 files (~1.5 MB)
 
 ## Usage in Code
 
-### Using AudioManager
+### Using Voice Samples with AudioManager
 
-The `AudioManager` class provides methods to preload and play audio files:
+**Recommended:** Use the voice samples to hear Mittenz speak!
 
 ```java
 AudioManager audioManager = new AudioManager();
 
-// Preload audio for faster playback
-audioManager.preloadAudio("welcome", "audio/greetings/welcome.wav");
-audioManager.preloadAudio("hostile", "audio/dialogue/mittenz_hostile.wav");
-audioManager.preloadAudio("reminder", "audio/notifications/reminder.wav");
+// Preload VOICE samples (numbered files - these have actual speech!)
+audioManager.preloadAudio("greeting", "audio/greetings/greeting_initial.wav");
+audioManager.preloadAudio("hostile1", "audio/dialogue/mittenz_hostile_01.wav");
+audioManager.preloadAudio("hostile2", "audio/dialogue/mittenz_hostile_02.wav");
+audioManager.preloadAudio("curious1", "audio/dialogue/mittenz_curious_01.wav");
+audioManager.preloadAudio("cooperative1", "audio/dialogue/mittenz_cooperative_01.wav");
+audioManager.preloadAudio("reminder", "audio/notifications/reminder_01.wav");
+audioManager.preloadAudio("alert", "audio/notifications/alert_oxygen.wav");
+
+// Play voice samples
+audioManager.playSoundEffect("greeting");  // Mittenz says hello!
+audioManager.playSoundEffect("hostile1");  // Mittenz angry dialogue
+```
+
+### Using Tone-Based Samples (Legacy)
+
+```java
+// Preload tone-based audio (simple beeps - no speech)
+audioManager.preloadAudio("welcome_tone", "audio/greetings/welcome.wav");
 audioManager.preloadAudio("click", "audio/sounds/button_click.wav");
 
-// Get preloaded audio path
-String welcomePath = audioManager.getPreloadedAudio("welcome");
-
-// Play sound effect
+// Play tone
 audioManager.playSoundEffect("click");
 ```
 
@@ -185,15 +269,41 @@ switch (stage) {
 
 ## Customization
 
-These audio files are **synthesized musical tones and chords**, not actual voice or speech. For production use, you should:
+### About the Voice Samples
 
-1. **Replace with professional voice recordings**: Use voice actors for Mittenz's dialogue
-2. **Implement Text-to-Speech**: Integrate TTS engines like:
-   - Google Cloud Text-to-Speech
-   - Amazon Polly
-   - Microsoft Azure Speech
-   - Local TTS libraries (espeak, festival)
-3. **Add voice variety**: Create multiple variations of each sound
+The voice samples included are **TTS-generated using espeak**, providing actual speech so you can hear Mittenz talk! While these demonstrate the concept well, for a polished production experience, consider:
+
+1. **Professional Voice Actress**: Hire a voice actress who can portray:
+   - Young female character (late teens)
+   - Well-spoken and proper demeanor
+   - Emotional range across relationship stages (hostile → curious → cooperative)
+   - Optional: Subtle Japanese accent or inflection
+
+2. **Advanced TTS with Emotion Control**: Use premium TTS services:
+   - Google Cloud Text-to-Speech (WaveNet voices)
+   - Amazon Polly (Neural voices with SSML emotion tags)
+   - Microsoft Azure Speech (Neural voices)
+   - ElevenLabs (AI voice cloning with emotion)
+   - Replica Studios (game-focused AI voices)
+
+3. **Voice Cloning**: Create a consistent Mittenz voice:
+   - Record 30-60 minutes of sample dialogue
+   - Train a voice model with services like:
+     - ElevenLabs Voice Cloning
+     - Resemble AI
+     - Descript Overdub
+   - Generate all dialogue with consistent character voice
+
+4. **Emotional Variation**: Adjust voice based on:
+   - Relationship stage (hostile = harsh/angry, cooperative = warm/friendly)
+   - Skill level (0-20: uncertain, 80-100: confident)
+   - Context (alert = urgent, companion = casual)
+
+### About the Tone-Based Samples
+
+The tone-based files (without numbers) are simple musical tones and chords. These are kept for:
+- Basic audio system testing
+- UI sound effects (clicks, beeps)
 4. **Implement voice modulation**: Adjust pitch/tone based on:
    - Relationship stage (hostile = harsh, cooperative = warm)
    - Skill level (0-100)
