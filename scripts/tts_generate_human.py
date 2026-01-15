@@ -20,6 +20,7 @@ import argparse
 import sys
 import json
 import random
+import re
 import wave
 import numpy as np
 from pathlib import Path
@@ -160,6 +161,9 @@ EMOTION_PROFILES = {
 class ProsodyController:
     """Controls natural speech prosody patterns with contextual awareness."""
     
+    # Constant for breath marker threshold
+    BREATH_MARKER_WORD_THRESHOLD = 15  # Add breath markers after sentences longer than this
+    
     def apply_context_prosody(self, text, context=None):
         """
         Apply contextual prosody to text based on emotion, urgency, and relationship.
@@ -258,11 +262,33 @@ class ProsodyController:
         multiplier = params.get('pause_multiplier', 1.0)
         
         # Add pauses after punctuation (simulate natural breathing)
-        # Use extra spaces for basic pause effect
-        text = text.replace('. ', '.  ')  # Period pause
-        text = text.replace('! ', '!  ')  # Exclamation pause
-        text = text.replace('? ', '?  ')  # Question pause
-        text = text.replace(', ', ', ')   # Comma pause
+        # Use extra spaces for basic pause effect - more spaces = longer pause
+        # Adjust number of spaces based on context multiplier
+        if multiplier <= 0.6:  # Very short pauses (urgent/critical)
+            period_spaces = ' '
+            exclaim_spaces = ' '
+            question_spaces = ' '
+            comma_spaces = ''
+        elif multiplier <= 0.9:  # Short pauses (hostile/angry)
+            period_spaces = '  '
+            exclaim_spaces = ' '
+            question_spaces = '  '
+            comma_spaces = ' '
+        elif multiplier <= 1.2:  # Normal pauses
+            period_spaces = '  '
+            exclaim_spaces = '  '
+            question_spaces = '  '
+            comma_spaces = ' '
+        else:  # Long pauses (contemplative/cooperative)
+            period_spaces = '   '
+            exclaim_spaces = '  '
+            question_spaces = '   '
+            comma_spaces = ' '
+        
+        text = text.replace('. ', '.' + period_spaces)
+        text = text.replace('! ', '!' + exclaim_spaces)
+        text = text.replace('? ', '?' + question_spaces)
+        text = text.replace(', ', ',' + comma_spaces)
         
         # Add thinking pauses before certain words
         thinking_words = ['well', 'hmm', 'let me', 'perhaps', 'you know', 'now', 'actually']
@@ -272,8 +298,9 @@ class ProsodyController:
             matches = pattern.finditer(text)
             for match in matches:
                 original = match.group(0)
-                # Add extra space before the thinking word
-                replacement = '  ' + original.strip() + ' '
+                # Add extra space before the thinking word (more for longer pauses)
+                extra_space = '  ' if multiplier > 1.0 else ' '
+                replacement = extra_space + original.strip() + ' '
                 text = text.replace(original, replacement, 1)
         
         return text
@@ -302,11 +329,11 @@ class ProsodyController:
     def add_breath_markers(self, text, params=None):
         """Add breath markers in natural places."""
         
-        # Add breath after long sentences (>15 words)
+        # Add breath after long sentences
         sentences = []
         for sentence in text.split('. '):
             word_count = len(sentence.split())
-            if word_count > 15:
+            if word_count > self.BREATH_MARKER_WORD_THRESHOLD:
                 # Add a slight pause marker (extra space simulates breath)
                 sentences.append(sentence + '  ')
             else:
@@ -320,24 +347,14 @@ class ProsodyController:
         
         Note: Currently returns plain text as Coqui TTS has limited SSML support.
         This is a placeholder for future SSML-capable TTS engines.
+        
+        The params argument is accepted for forward compatibility and may include
+        values such as speaking rate and pitch, which can be mapped to SSML
+        attributes in engines that support them.
         """
-        rate = params.get('rate', 1.0)
-        pitch = params.get('pitch', 1.0)
-        
-        # Map rate to SSML speed
-        if rate < 0.9:
-            rate_str = 'slow'
-        elif rate < 1.1:
-            rate_str = 'medium'
-        else:
-            rate_str = 'fast'
-        
-        # Calculate pitch percentage
-        pitch_pct = int((pitch - 1.0) * 100)
-        pitch_str = f"{pitch_pct:+d}%" if pitch_pct != 0 else "0%"
-        
-        # For now, return plain text since Coqui TTS doesn't fully support SSML
+        # For now, return plain text since Coqui TTS doesn't fully support SSML.
         # In future, this could generate proper SSML for compatible engines
+        # using values from params (e.g., rate, pitch, emotion).
         return text
     
     def process_text(self, text, context=None):
@@ -362,6 +379,7 @@ class HumanLikeEnhancer:
     BREATH_MIX_SPEECH_LEVEL = 0.95  # Reduce speech to 95% when adding breath
     BREATH_MIX_BREATH_LEVEL = 0.3   # Mix breath at 30% volume
     BREATH_POSITION_VARIANCE = 0.05  # ±5% random variance in breath position
+    BREATH_END_BUFFER = 1000  # Minimum buffer samples from end of audio
     
     def __init__(self):
         """Initialize the enhancer with breath sound library."""
@@ -424,7 +442,6 @@ class HumanLikeEnhancer:
         
         # Estimate positions for breath sounds
         # Divide audio into segments for each sentence
-        audio_duration = len(audio) / sr
         breath_positions = []
         
         for i in range(1, sentence_count):
@@ -437,7 +454,7 @@ class HumanLikeEnhancer:
         
         # Insert breath sounds
         for pos in breath_positions:
-            if pos < len(audio) - 1000:  # Ensure we don't go past the end
+            if pos < len(audio) - self.BREATH_END_BUFFER:  # Ensure we don't go past the end
                 breath = self.generate_breath_sound(duration_ms=120, sr=sr)
                 # Mix breath into audio at configured levels
                 end_pos = min(pos + len(breath), len(audio))
