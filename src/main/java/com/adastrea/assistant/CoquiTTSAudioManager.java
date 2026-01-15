@@ -34,6 +34,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class CoquiTTSAudioManager extends AudioManager {
     
+    // Default context values
+    private static final String DEFAULT_URGENCY = "normal";
+    private static final String DEFAULT_RELATIONSHIP = "cooperative";
+    
     private final String ttsScriptPath;
     private final String audioOutputDir;
     private final boolean usePythonTTS;
@@ -144,16 +148,53 @@ public class CoquiTTSAudioManager extends AudioManager {
     }
     
     /**
-     * Generate audio using Coqui TTS.
+     * Play voice message with emotional expression and contextual prosody.
+     * 
+     * @param message The message to speak
+     * @param emotion The emotion to convey (hostile, curious, cooperative, excited, etc.)
+     * @param urgency The urgency level (normal, high, critical)
+     * @param relationshipStage The relationship context (hostile, curious, cooperative)
+     * @return CompletableFuture that completes when audio generation finishes (or immediately if disabled)
+     */
+    public CompletableFuture<Void> playVoiceWithContext(String message, String emotion, String urgency, String relationshipStage) {
+        if (!isAudioEnabled()) {
+            return CompletableFuture.completedFuture(null);
+        }
+        
+        if (!usePythonTTS) {
+            // Fallback to console output
+            System.out.println("[AUDIO] Assistant speaks (" + emotion + ", " + urgency + "): " + message);
+            return CompletableFuture.completedFuture(null);
+        }
+        
+        // Generate audio asynchronously
+        return CompletableFuture.runAsync(() -> {
+            try {
+                String audioPath = generateAudioWithContext(message, emotion, urgency, relationshipStage);
+                if (audioPath != null) {
+                    playAudioFile(audioPath);
+                }
+            } catch (Exception e) {
+                System.err.println("[ERROR] Failed to generate or play audio: " + e.getMessage());
+                // Fallback to console output
+                System.out.println("[AUDIO] Assistant speaks (" + emotion + ", " + urgency + "): " + message);
+            }
+        });
+    }
+    
+    /**
+     * Generate audio using Coqui TTS with contextual prosody.
      * 
      * @param text The text to synthesize
      * @param emotion The emotion to convey
+     * @param urgency The urgency level
+     * @param relationshipStage The relationship context
      * @return The path to the generated audio file, or null on failure
      */
-    private String generateAudio(String text, String emotion) {
+    private String generateAudioWithContext(String text, String emotion, String urgency, String relationshipStage) {
         try {
-            // Create unique filename based on SHA-256 hash and emotion
-            String hash = generateHash(text + emotion);
+            // Create unique filename based on SHA-256 hash with all context
+            String hash = generateHash(text + emotion + urgency + relationshipStage);
             String filename = "tts_" + hash.substring(0, 16) + ".wav";
             String outputPath = Paths.get(audioOutputDir, filename).toString();
             
@@ -164,7 +205,7 @@ public class CoquiTTSAudioManager extends AudioManager {
                 return outputPath;
             }
             
-            // Build command
+            // Build command with new parameters
             List<String> command = new ArrayList<>();
             command.add(pythonExecutable);
             command.add(ttsScriptPath);
@@ -172,10 +213,14 @@ public class CoquiTTSAudioManager extends AudioManager {
             command.add(text);
             command.add("--emotion");
             command.add(emotion);
+            command.add("--urgency");
+            command.add(urgency);
+            command.add("--relationship");
+            command.add(relationshipStage);
             command.add("--output");
             command.add(outputPath);
             
-            System.out.println("[INFO] Generating audio with Coqui TTS...");
+            System.out.println("[INFO] Generating audio with Coqui TTS (context-aware)...");
             System.out.println("[DEBUG] Command: " + String.join(" ", command));
             
             // Execute TTS generation
@@ -227,6 +272,18 @@ public class CoquiTTSAudioManager extends AudioManager {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    /**
+     * Generate audio using Coqui TTS.
+     * 
+     * @param text The text to synthesize
+     * @param emotion The emotion to convey
+     * @return The path to the generated audio file, or null on failure
+     */
+    private String generateAudio(String text, String emotion) {
+        // Use default values for urgency and relationship
+        return generateAudioWithContext(text, emotion, DEFAULT_URGENCY, DEFAULT_RELATIONSHIP);
     }
     
     /**

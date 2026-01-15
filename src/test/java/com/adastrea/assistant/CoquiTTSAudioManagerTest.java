@@ -155,4 +155,119 @@ class CoquiTTSAudioManagerTest {
             });
         }
     }
+    
+    @Test
+    void testPlayVoiceWithContext() {
+        // Test the new context-aware method with default parameters
+        assertDoesNotThrow(() -> {
+            audioManager.playVoiceWithContext(
+                "Test message", 
+                "neutral", 
+                "normal", 
+                "cooperative"
+            );
+        });
+    }
+    
+    @Test
+    void testPlayVoiceWithContextUrgencyLevels() {
+        // Test different urgency levels
+        String[] urgencyLevels = {"normal", "high", "critical"};
+        
+        for (String urgency : urgencyLevels) {
+            assertDoesNotThrow(() -> {
+                audioManager.playVoiceWithContext(
+                    "Urgency test: " + urgency,
+                    "neutral",
+                    urgency,
+                    "cooperative"
+                );
+            });
+        }
+    }
+    
+    @Test
+    void testPlayVoiceWithContextRelationshipStages() {
+        // Test different relationship stages
+        String[] relationships = {"hostile", "curious", "cooperative"};
+        
+        for (String relationship : relationships) {
+            assertDoesNotThrow(() -> {
+                audioManager.playVoiceWithContext(
+                    "Relationship test: " + relationship,
+                    "neutral",
+                    "normal",
+                    relationship
+                );
+            });
+        }
+    }
+    
+    @Test
+    void testPlayVoiceWithContextCombinations() {
+        // Test various combinations of emotion, urgency, and relationship
+        assertDoesNotThrow(() -> {
+            // Hostile + Critical
+            audioManager.playVoiceWithContext(
+                "Get away!",
+                "angry",
+                "critical",
+                "hostile"
+            );
+            
+            // Curious + High urgency
+            audioManager.playVoiceWithContext(
+                "What's that?",
+                "fascinated",
+                "high",
+                "curious"
+            );
+            
+            // Cooperative + Normal
+            audioManager.playVoiceWithContext(
+                "Let's work together",
+                "friendly",
+                "normal",
+                "cooperative"
+            );
+        });
+    }
+    
+    @Test
+    void testPlayVoiceWithContextWhenAudioDisabled() {
+        audioManager.setAudioEnabled(false);
+        
+        // Should not throw when disabled
+        assertDoesNotThrow(() -> {
+            audioManager.playVoiceWithContext(
+                "Test message",
+                "neutral",
+                "critical",
+                "hostile"
+            );
+        });
+        
+        audioManager.setAudioEnabled(true);
+    }
+    
+    @Test
+    void testPlayVoiceWithContextAllEmotions() {
+        // Test all emotions with context parameters
+        String[] emotions = {
+            "hostile", "angry", "curious", "fascinated", 
+            "cooperative", "friendly", "excited", "worried",
+            "contemplative", "urgent", "neutral"
+        };
+        
+        for (String emotion : emotions) {
+            assertDoesNotThrow(() -> {
+                audioManager.playVoiceWithContext(
+                    "Context test for " + emotion,
+                    emotion,
+                    "normal",
+                    "cooperative"
+                );
+            });
+        }
+    }
 }
