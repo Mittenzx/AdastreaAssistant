@@ -34,6 +34,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class CoquiTTSAudioManager extends AudioManager {
     
+    // Default context values
+    private static final String DEFAULT_URGENCY = "normal";
+    private static final String DEFAULT_RELATIONSHIP = "cooperative";
+    
     private final String ttsScriptPath;
     private final String audioOutputDir;
     private final boolean usePythonTTS;
@@ -279,7 +283,7 @@ public class CoquiTTSAudioManager extends AudioManager {
      */
     private String generateAudio(String text, String emotion) {
         // Use default values for urgency and relationship
-        return generateAudioWithContext(text, emotion, "normal", "cooperative");
+        return generateAudioWithContext(text, emotion, DEFAULT_URGENCY, DEFAULT_RELATIONSHIP);
     }
     
     /**

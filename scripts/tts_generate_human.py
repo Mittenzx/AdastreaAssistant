@@ -257,13 +257,6 @@ class ProsodyController:
         
         multiplier = params.get('pause_multiplier', 1.0)
         
-        # Calculate pause durations (in milliseconds)
-        period_pause = int(400 * multiplier)
-        exclaim_pause = int(350 * multiplier)
-        question_pause = int(450 * multiplier)
-        comma_pause = int(200 * multiplier)
-        thinking_pause = int(300 * multiplier)
-        
         # Add pauses after punctuation (simulate natural breathing)
         # Use extra spaces for basic pause effect
         text = text.replace('. ', '.  ')  # Period pause
@@ -275,7 +268,6 @@ class ProsodyController:
         thinking_words = ['well', 'hmm', 'let me', 'perhaps', 'you know', 'now', 'actually']
         for word in thinking_words:
             # Case-insensitive replacement
-            import re
             pattern = re.compile(r'\s+' + re.escape(word) + r'\s+', re.IGNORECASE)
             matches = pattern.finditer(text)
             for match in matches:
@@ -329,14 +321,20 @@ class ProsodyController:
         Note: Currently returns plain text as Coqui TTS has limited SSML support.
         This is a placeholder for future SSML-capable TTS engines.
         """
-        rate_map = {
-            r: 'slow' if r < 0.9 else 'medium' if r < 1.1 else 'fast'
-            for r in [params.get('rate', 1.0)]
-        }
-        rate = rate_map[params.get('rate', 1.0)]
+        rate = params.get('rate', 1.0)
+        pitch = params.get('pitch', 1.0)
         
-        pitch_pct = int((params.get('pitch', 1.0) - 1.0) * 100)
-        pitch = f"{pitch_pct:+d}%" if pitch_pct != 0 else "0%"
+        # Map rate to SSML speed
+        if rate < 0.9:
+            rate_str = 'slow'
+        elif rate < 1.1:
+            rate_str = 'medium'
+        else:
+            rate_str = 'fast'
+        
+        # Calculate pitch percentage
+        pitch_pct = int((pitch - 1.0) * 100)
+        pitch_str = f"{pitch_pct:+d}%" if pitch_pct != 0 else "0%"
         
         # For now, return plain text since Coqui TTS doesn't fully support SSML
         # In future, this could generate proper SSML for compatible engines
@@ -359,6 +357,11 @@ class ProsodyController:
 
 class HumanLikeEnhancer:
     """Adds human-like variations and imperfections to speech."""
+    
+    # Constants for breath sound mixing
+    BREATH_MIX_SPEECH_LEVEL = 0.95  # Reduce speech to 95% when adding breath
+    BREATH_MIX_BREATH_LEVEL = 0.3   # Mix breath at 30% volume
+    BREATH_POSITION_VARIANCE = 0.05  # ±5% random variance in breath position
     
     def __init__(self):
         """Initialize the enhancer with breath sound library."""
@@ -427,17 +430,19 @@ class HumanLikeEnhancer:
         for i in range(1, sentence_count):
             # Place breath roughly at sentence boundaries
             position = int((i / sentence_count) * len(audio))
-            # Add some randomness (±5%)
-            position += int(np.random.uniform(-0.05, 0.05) * len(audio) / sentence_count)
+            # Add some randomness
+            position += int(np.random.uniform(-self.BREATH_POSITION_VARIANCE, 
+                                             self.BREATH_POSITION_VARIANCE) * len(audio) / sentence_count)
             breath_positions.append(position)
         
         # Insert breath sounds
         for pos in breath_positions:
             if pos < len(audio) - 1000:  # Ensure we don't go past the end
                 breath = self.generate_breath_sound(duration_ms=120, sr=sr)
-                # Mix breath into audio at low volume
+                # Mix breath into audio at configured levels
                 end_pos = min(pos + len(breath), len(audio))
-                audio[pos:end_pos] = audio[pos:end_pos] * 0.95 + breath[:end_pos-pos] * 0.3
+                audio[pos:end_pos] = (audio[pos:end_pos] * self.BREATH_MIX_SPEECH_LEVEL + 
+                                     breath[:end_pos-pos] * self.BREATH_MIX_BREATH_LEVEL)
         
         return audio
     
