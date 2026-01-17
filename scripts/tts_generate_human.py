@@ -668,18 +668,40 @@ class EmotionalVoiceEngine:
         Apply gentle compression for controlled dynamics (Hitagi style).
         
         Reduces dynamic range for more consistent, controlled delivery.
+        
+        Args:
+            audio: Input audio array
+            threshold_db: Threshold in dB (default: -20)
+            ratio: Compression ratio (default: 2.5)
+        
+        Returns:
+            Compressed audio array
         """
+        # Validate parameters
+        if ratio <= 0:
+            raise ValueError('Compression ratio must be positive')
+        
         # Calculate RMS (root mean square) for dynamic measurement
-        rms = np.sqrt(np.mean(audio**2))
+        # Use float64 to prevent overflow with large audio arrays
+        rms = np.sqrt(np.mean(audio**2, dtype=np.float64))
         threshold_linear = 10**(threshold_db/20)
+        
+        # Safety check: ensure RMS is positive and non-zero
+        if rms <= 0 or not np.isfinite(rms):
+            # Audio is silent or invalid, return as-is
+            return audio
         
         # Apply compression if signal exceeds threshold
         if rms > threshold_linear:
-            # Calculate gain reduction
-            excess_db = 20 * np.log10(rms / threshold_linear)
-            reduction_db = excess_db * (1 - 1/ratio)
-            gain_reduction = 10**(-reduction_db/20)
-            audio = audio * gain_reduction
+            # Calculate gain reduction (safe division and log)
+            try:
+                excess_db = 20 * np.log10(rms / threshold_linear)
+                reduction_db = excess_db * (1 - 1/ratio)
+                gain_reduction = 10**(-reduction_db/20)
+                audio = audio * gain_reduction
+            except (ValueError, FloatingPointError):
+                # If calculation fails, return original audio
+                pass
         
         return audio
     
