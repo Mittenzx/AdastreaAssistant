@@ -6,7 +6,8 @@ A voice assistant for game integration, inspired by successful implementations i
 
 - **[Voice Assistant Research](VOICE_ASSISTANT_RESEARCH.md)**: Comprehensive research on game voice assistants, including Warframe's Cephalon system, voice synthesis technologies, and implementation patterns
 - **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)**: Phased development plan with technology recommendations and success metrics
-- **[Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md)** ⭐ **NEW**: Complete 10-week plan to make Mittenz's voice sound genuinely human with emotional expression
+- **[Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md)** ⭐: Complete 10-week plan to make Mittenz's voice sound genuinely human with emotional expression
+- **[Voice Model Target](docs/VOICE_MODEL_TARGET.md)** ✨ **NEW**: Technical specification for Mittenz's voice inspired by Hitagi Senjougahara's vocal characteristics
 - **[Quick Start: Human Audio](docs/QUICKSTART_HUMAN_AUDIO.md)**: Get started with human-like audio generation in 5-10 minutes
 
 ## Research Highlights
@@ -66,6 +67,9 @@ An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides 
 ## Features
 
 - **Audio System**: Text-to-speech voice synthesis for natural conversation
+  - **Voice Model**: Inspired by Hitagi Senjougahara (Monogatari Series) vocal characteristics - mature, controlled delivery with crisp articulation
+  - **Emotional Expression**: 11 emotion profiles with contextual prosody
+  - **Human-like Quality**: Natural pauses, breath sounds, and micro-variations
 - **Visual Components**: On-screen notifications, subtitles, and assistant avatar
 - **Companion Dialogue**: Random friendly messages to keep players company
 - **Character Progression**: Mittenz evolves through three relationship stages (Hostile → Curious → Cooperative)

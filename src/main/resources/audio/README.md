@@ -2,6 +2,18 @@
 
 This directory contains sample audio files to demonstrate the audio capabilities of the AdastreaAssistant system.
 
+## Voice Model
+
+Mittenz's voice is designed with inspiration from **Hitagi Senjougahara** (Monogatari Series, VA: Chiwa Saito) in terms of **vocal characteristics only**:
+
+- **Mature, controlled delivery**: Low-medium pitch with measured, deliberate pacing
+- **Crisp articulation**: Clear enunciation with sharp, precise consonants  
+- **Reserved emotional expression**: Subtle warmth and emotion beneath calm surface
+- **Deliberate rhythm**: Strategic pauses and controlled speech rate
+- **Dry, sophisticated tone**: Professional delivery avoiding high-pitched clichés
+
+This creates a distinctive, memorable voice quality while maintaining Mittenz's unique personality and character development. See [docs/VOICE_MODEL_TARGET.md](../../docs/VOICE_MODEL_TARGET.md) for complete technical specification.
+
 ## Audio Types Included
 
 This directory now contains **TWO types** of audio samples:
