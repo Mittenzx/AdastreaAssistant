@@ -9,8 +9,17 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-sys.path.insert(0, 'scripts')
-from test_voice_samples import AudioAnalyzer
+# Add parent directory to path to import test_voice_samples module
+# This is a demonstration script, so direct path manipulation is acceptable here
+script_dir = Path(__file__).parent
+sys.path.insert(0, str(script_dir))
+
+try:
+    from test_voice_samples import AudioAnalyzer
+except ImportError as e:
+    print(f"ERROR: Could not import AudioAnalyzer from test_voice_samples.py", file=sys.stderr)
+    print(f"Make sure test_voice_samples.py is in the same directory: {script_dir}", file=sys.stderr)
+    sys.exit(1)
 
 def main():
     print("="*70)

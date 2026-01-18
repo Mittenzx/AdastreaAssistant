@@ -243,17 +243,33 @@ class TestSampleGenerator:
         self.output_dir.mkdir(parents=True, exist_ok=True)
     
     def generate_test_sample(self, text, emotion, output_name):
-        """Generate a single test sample."""
+        """
+        Generate a single test sample.
+        
+        Args:
+            text: Text to synthesize (will be passed as string argument)
+            emotion: Emotion profile name (validated against known emotions)
+            output_name: Output filename without extension
+            
+        Returns:
+            bool: True if generation successful, False otherwise
+            
+        Note:
+            Uses subprocess.run with list arguments (not shell=True) which
+            automatically handles argument escaping, preventing command injection.
+        """
         output_path = self.output_dir / f"{output_name}.wav"
         
         print(f"Generating: {output_name} (emotion: {emotion})")
         
-        # Run TTS generation script
+        # Run TTS generation script with properly escaped arguments
+        # Using list form of subprocess.run automatically handles argument escaping
+        # and prevents command injection since shell=False (default)
         cmd = [
             'python3',
             str(self.tts_script),
-            '--text', text,
-            '--emotion', emotion,
+            '--text', str(text),  # Convert to string for safety
+            '--emotion', str(emotion),  # Convert to string for safety
             '--output', str(output_path)
         ]
         
