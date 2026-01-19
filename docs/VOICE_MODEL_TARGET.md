@@ -1,8 +1,9 @@
 # Voice Model Target: Hitagi Senjougahara Inspiration
 
-**Document Version**: 1.0  
+**Document Version**: 2.0  
 **Created**: January 17, 2026  
-**Status**: Research Complete - Implementation Guide
+**Last Updated**: January 19, 2026  
+**Status**: Production Deployment - Implementation Complete
 
 ---
 
@@ -299,13 +300,166 @@ def apply_hitagi_prosody(self, text, context=None):
 
 ---
 
+## Troubleshooting and Fine-Tuning
+
+### Common Issues and Solutions
+
+#### Issue: Voice sounds too robotic or monotone
+**Solution**: 
+- Increase `emotion_intensity` slightly (try 0.75 instead of 0.70)
+- Add more variation to pause durations
+- Ensure breath sounds are being inserted properly
+- Check that micro-variations are enabled (`add_variations=True`)
+
+#### Issue: Articulation too sharp or harsh
+**Solution**:
+- Reduce `consonant_emphasis` from 1.15 to 1.10
+- Lower the consonant boost from 12% to 8-10% in `apply_hitagi_voice_characteristics()`
+- Adjust high-frequency filter to be gentler (reduce butter filter order)
+
+#### Issue: Speaking pace feels too slow
+**Solution**:
+- Increase base_rate from 0.90 to 0.92-0.95
+- Reduce pause_multiplier values slightly
+- Check urgency parameter - use 'normal' or 'high' for faster delivery
+
+#### Issue: Pitch sounds unnatural
+**Solution**:
+- Fine-tune base_pitch adjustment (try -0.06 instead of -0.08)
+- Verify TTS model supports pitch shifting properly
+- Check for audio clipping or distortion after pitch shift
+
+#### Issue: Audio quality degradation
+**Solution**:
+- Ensure all processing libraries are up-to-date
+- Check sample rate consistency (22050 Hz throughout)
+- Verify normalization isn't causing clipping (check headroom)
+- Review compression settings (may be too aggressive)
+
+### Parameter Tuning Guidelines
+
+**For more mature/serious tone**:
+- Decrease pitch_shift: -0.10 to -0.12
+- Decrease rate: 0.85 to 0.88
+- Increase pause_multiplier: 1.3 to 1.4
+- Decrease breathiness: 0.20 to 0.25
+
+**For more energetic/lively tone** (while maintaining Hitagi style):
+- Increase pitch_shift: -0.03 to -0.05
+- Increase rate: 0.92 to 0.95
+- Decrease pause_multiplier: 1.1 to 1.15
+- Slight increase in breathiness: 0.30 to 0.35
+
+**For clearer articulation**:
+- Increase consonant_emphasis: 1.15 to 1.20
+- Boost 3-6 kHz range more aggressively (12% to 15%)
+- Reduce low-pass filter cutoff: 7500 Hz to 7000 Hz
+
+### Audio Generation Best Practices
+
+1. **Test incrementally**: Generate a few samples first before batch regeneration
+2. **A/B comparison**: Always compare new samples with previous versions
+3. **Listen context**: Test audio in actual game environment, not just standalone
+4. **Multiple emotions**: Verify profile works across all emotion types
+5. **Volume consistency**: Check relative volume levels between different samples
+6. **Format validation**: Ensure output matches technical specifications (44.1kHz, 16-bit, mono, WAV)
+
+---
+
+## Advanced Customization
+
+### Creating Custom Emotion Variants
+
+To add a new emotion profile with Hitagi-style characteristics:
+
+```python
+'custom_emotion': {
+    'pitch_shift': -0.05,        # Start with baseline lower register
+    'rate': 0.90,                # Default to measured pace
+    'volume': 1.0,               # Adjust as needed
+    'tension': 0.50,             # Moderate baseline
+    'breathiness': 0.30,         # Keep low for crisp delivery
+    'description': 'Custom emotion - Hitagi style'
+}
+```
+
+### Contextual Voice Adaptation
+
+The system supports three relationship stages that affect voice characteristics:
+
+**Hostile Stage**:
+- More threatening, lower pitch
+- Controlled but assertive volume
+- Strategic pauses for intimidation
+- Very crisp, sharp articulation
+
+**Curious Stage**:
+- Intellectual curiosity, measured interest
+- Thoughtful pauses
+- Moderate engagement, never excited
+- Dry, analytical tone
+
+**Cooperative Stage**:
+- Reserved warmth, subtle affection
+- Intimate volume (slightly quieter)
+- Longest, most deliberate pauses
+- Relaxed but still articulate
+
+### Urgency Level Integration
+
+**Normal**: Standard Hitagi-style delivery (recommended for most content)
+**High**: 8-10% faster, slightly louder, shorter pauses
+**Critical**: 15% faster, 15% louder, but never panicked or frantic
+
+Even at critical urgency, Hitagi-inspired voice maintains control and clarity.
+
+---
+
+## Quality Assurance Checklist
+
+Before finalizing regenerated audio samples:
+
+### Technical Validation
+- [ ] All files are valid WAV format
+- [ ] Sample rate: 44100 Hz (or 22050 Hz if TTS default)
+- [ ] Bit depth: 16-bit
+- [ ] Channels: Mono
+- [ ] Encoding: PCM
+- [ ] No clipping or distortion
+- [ ] Consistent volume levels across samples
+
+### Voice Characteristics Validation
+- [ ] Pitch is in lower-medium range (not high-pitched)
+- [ ] Speaking rate is 10-15% slower than typical
+- [ ] Articulation is crisp and clear
+- [ ] Pauses are deliberate and strategic
+- [ ] Emotional expression is subtle but present
+- [ ] No excessive breathiness
+- [ ] Consistent voice quality across all samples
+
+### Emotional Range Validation
+- [ ] Hostile samples sound cold and controlled
+- [ ] Curious samples show intellectual interest
+- [ ] Cooperative samples have reserved warmth
+- [ ] Urgent samples maintain control despite speed
+- [ ] Emotional transitions feel natural
+
+### Integration Validation
+- [ ] AudioManager can load all samples
+- [ ] No playback errors in game environment
+- [ ] Volume consistent with sound effects
+- [ ] No audio artifacts during playback
+- [ ] Seamless transitions between voice lines
+
+---
+
 ## Documentation Updates
 
 ### Update emotion profile documentation
 
 File: `scripts/tts_generate_human.py`
 
-Add comment at top of EMOTION_PROFILES:
+✅ **COMPLETED**: Emotion profiles header already includes comprehensive documentation:
 ```python
 # ============================================================================
 # EMOTION PROFILES - Inspired by Hitagi Senjougahara vocal characteristics
@@ -315,14 +469,16 @@ Add comment at top of EMOTION_PROFILES:
 # Reference: Hitagi Senjougahara (VA: Chiwa Saito) from Monogatari Series
 # 
 # Key characteristics:
-# - Calm, deliberate speech with controlled pacing
+# - Calm, deliberate speech with controlled pacing (10-15% slower)
 # - Dry, deadpan tone with subtle emotional undercurrent
-# - Mature register avoiding high-pitched clichés
+# - Mature register avoiding high-pitched clichés (lower pitch by ~8%)
 # - Sharp, precise enunciation with clear consonants
-# - Strategic pauses for emphasis and control
+# - Strategic pauses for emphasis and control (20-30% longer)
 # 
 # Note: Personality and dialogue remain Mittenz's own - this affects only
 # vocal characteristics (pitch, tone, delivery style).
+# 
+# See docs/VOICE_MODEL_TARGET.md for complete specification.
 # ============================================================================
 ```
 
@@ -340,35 +496,58 @@ Mittenz's voice is designed with inspiration from Hitagi Senjougahara (Monogatar
 - **Deliberate rhythm**: Strategic pauses and controlled speech rate
 
 This creates a distinctive, memorable voice quality while maintaining Mittenz's unique personality and character development.
+
+For technical details, see [VOICE_MODEL_TARGET.md](docs/VOICE_MODEL_TARGET.md).
 ```
 
 ---
 
 ## Implementation Checklist
 
-### Immediate Tasks
+### Core Implementation (COMPLETED ✅)
 - [x] Update `EMOTION_PROFILES` in `tts_generate_human.py` with adjusted parameters
 - [x] Add `apply_hitagi_voice_characteristics()` function to audio processing
 - [x] Enhance `ProsodyController` with deliberate pause patterns
 - [x] Add voice profile constants for Hitagi-inspired characteristics
+- [x] Implement compression for controlled dynamics
+- [x] Add consonant clarity enhancement
+- [x] Integrate breathiness reduction
 
-### Testing Phase
+### Initial Testing Phase (COMPLETED ✅)
 - [x] Generate test samples with new voice profile
 - [x] Compare with current samples for quality assessment
 - [x] Validate pitch, rate, and articulation metrics
-- [x] A/B testing with project maintainer - **READY FOR REVIEW**
+- [x] A/B testing with project maintainer
+- [x] Address initial feedback and refinements
 
-### Documentation
-- [ ] Update code comments with voice model rationale
+### Documentation (IN PROGRESS 📝)
+- [x] Update code comments with voice model rationale
+- [x] Create comprehensive VOICE_MODEL_TARGET.md specification
+- [x] Add troubleshooting and fine-tuning guidance
+- [x] Document advanced customization options
+- [x] Add quality assurance checklist
 - [ ] Add this document to main README references
 - [ ] Update HUMAN_AUDIO_PLAN.md to reference voice model target
 - [ ] Document voice profile settings in TTS_QUICKSTART.md
 
-### Polish
-- [ ] Fine-tune parameters based on testing feedback
-- [ ] Regenerate all 19 audio samples with new voice profile
+### Production Deployment (IN PROGRESS 🚀)
+- [ ] Regenerate all audio samples with finalized voice profile
+  - [ ] 3 greeting samples
+  - [ ] 9 dialogue samples (3 per relationship stage)
+  - [ ] 3 companion message samples
+  - [ ] 4 notification samples
+  - Total: **19 voice samples**
+- [ ] Validate all generated audio files
+- [ ] Run quality assurance checklist
 - [ ] Update AudioManager integration if needed
-- [ ] Final validation and approval
+- [ ] Final stakeholder approval
+
+### Future Enhancements (PLANNED 🔮)
+- [ ] Fine-tune parameters based on gameplay feedback
+- [ ] Add more emotion variants as needed
+- [ ] Explore multi-speaker TTS models for voice variety
+- [ ] Consider SSML support for advanced prosody control
+- [ ] Investigate voice cloning for consistency
 
 ---
 
@@ -426,6 +605,7 @@ This voice model target provides a clear technical specification for making Mitt
 
 ---
 
-**Version**: 1.0  
-**Status**: Testing Phase Complete - Ready for Maintainer Review  
-**Next Steps**: A/B testing and feedback from project maintainer
+**Version**: 2.0  
+**Status**: Production Deployment - Regenerating Audio Samples  
+**Last Updated**: January 19, 2026  
+**Next Steps**: Complete audio regeneration and final quality validation
