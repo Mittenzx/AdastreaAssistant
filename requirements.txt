@@ -1,8 +1,16 @@
 # Python dependencies for human-like audio generation
 # Install with: pip install -r requirements.txt
 
-# Core TTS engine
-TTS>=0.20.0
+# IMPORTANT: TTS library requires Python 3.9-3.11 (not 3.12+)
+# If you have Python 3.12+, use pyenv or conda to create a Python 3.11 environment
+# Example: 
+#   pyenv install 3.11
+#   pyenv local 3.11
+#   python -m venv tts-env
+#   source tts-env/bin/activate
+
+# Core TTS engine (requires Python <3.12)
+TTS>=0.20.0,<0.23.0
 
 # Audio processing libraries
 librosa>=0.10.0
@@ -10,7 +18,7 @@ soundfile>=0.12.0
 scipy>=1.10.0
 
 # NumPy (required by librosa)
-numpy>=1.24.0
+numpy>=1.24.0,<2.0.0
 
 # Optional: GPU acceleration (uncomment if you have CUDA)
 # torch>=2.0.0
