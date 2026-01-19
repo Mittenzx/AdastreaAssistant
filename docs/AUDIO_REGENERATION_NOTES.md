@@ -33,8 +33,8 @@ The VOICE_MODEL_TARGET.md document v2.0 adds:
 **CRITICAL**: The Coqui TTS library requires **Python 3.9-3.11** and does NOT support Python 3.12+.
 
 ### Current Environment
-- Python version: **3.12.3**
-- Status: ❌ Incompatible with TTS library
+- Python version: **3.12+**
+- Status: ❌ Incompatible with TTS library (requires 3.9-3.11)
 
 ### Solution Options
 
