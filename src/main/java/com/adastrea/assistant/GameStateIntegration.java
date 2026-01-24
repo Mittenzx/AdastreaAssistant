@@ -11,11 +11,13 @@ import java.util.Map;
 public class GameStateIntegration implements GameStateListener {
     
     private final AIAssistant assistant;
+    private final ContextTracker contextTracker;
     private final Map<String, Long> lastWarningTime;
     private static final long WARNING_COOLDOWN_MS = 30000; // 30 seconds between same warnings
     
     public GameStateIntegration(AIAssistant assistant) {
         this.assistant = assistant;
+        this.contextTracker = assistant.getContextTracker();
         this.lastWarningTime = new HashMap<>();
     }
     
@@ -41,6 +43,11 @@ public class GameStateIntegration implements GameStateListener {
     @Override
     public void onLowOxygen(int oxygenLevel, int timeRemaining) {
         if (!canWarn("oxygen")) return;
+        
+        // Record in context
+        contextTracker.recordEvent("oxygen_low", "Oxygen at " + oxygenLevel + "%", 
+            oxygenLevel < 20 ? ContextTracker.EventSeverity.CRITICAL : ContextTracker.EventSeverity.HIGH);
+        contextTracker.updatePlayerState("oxygen", oxygenLevel);
         
         String urgency = oxygenLevel < 20 ? "urgent" : "worried";
         String message;
@@ -103,6 +110,11 @@ public class GameStateIntegration implements GameStateListener {
     
     @Override
     public void onLocationEntered(String locationName, String locationType) {
+        // Update context
+        contextTracker.setCurrentLocation(locationName);
+        contextTracker.recordEvent("location_entered", locationName + " (" + locationType + ")", 
+            ContextTracker.EventSeverity.INFO);
+        
         String message;
         
         if (assistant.getProfile() != null) {

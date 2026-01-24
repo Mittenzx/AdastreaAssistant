@@ -14,6 +14,7 @@ public class AIAssistant {
     private final DialogueSystem dialogueSystem;
     private final ReminderSystem reminderSystem;
     private final TeachingSystem teachingSystem;
+    private final ContextTracker contextTracker;
     private boolean isEnabled;
     private String assistantName;
     private int interactionCount;
@@ -30,6 +31,7 @@ public class AIAssistant {
         this.dialogueSystem = new DialogueSystem();
         this.reminderSystem = new ReminderSystem();
         this.teachingSystem = new TeachingSystem();
+        this.contextTracker = new ContextTracker();
         this.isEnabled = true;
         this.interactionCount = 0;
         this.profile = null;
@@ -74,6 +76,10 @@ public class AIAssistant {
         if (isEnabled) {
             audioManager.playVoice(message);
             visualManager.showSubtitle(message);
+            
+            // Track in context
+            contextTracker.recordInteraction(assistantName, message, 
+                ContextTracker.InteractionType.ASSISTANT_RESPONSE);
         }
     }
 
@@ -135,6 +141,11 @@ public class AIAssistant {
         if (!isEnabled) {
             return "";
         }
+        
+        // Track player query in context
+        contextTracker.recordInteraction("Player", query, 
+            ContextTracker.InteractionType.PLAYER_QUERY);
+        
         String response = dialogueSystem.generateResponse(query);
         speak(response);
         trackInteraction();
@@ -298,5 +309,9 @@ public class AIAssistant {
 
     public TeachingSystem getTeachingSystem() {
         return teachingSystem;
+    }
+    
+    public ContextTracker getContextTracker() {
+        return contextTracker;
     }
 }
