@@ -70,4 +70,14 @@ public abstract class AssistantProfile {
     public boolean hasAbility(String ability) {
         return specialAbilities.contains(ability);
     }
+    
+    /**
+     * Get the current relationship stage
+     * Default implementation returns COOPERATIVE
+     * Override this in profiles that support relationship progression
+     * @return The current relationship stage
+     */
+    public RelationshipStage getRelationshipStage() {
+        return RelationshipStage.COOPERATIVE;
+    }
 }

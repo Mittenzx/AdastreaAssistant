@@ -6,8 +6,9 @@ A voice assistant for game integration, inspired by successful implementations i
 
 - **[Voice Assistant Research](VOICE_ASSISTANT_RESEARCH.md)**: Comprehensive research on game voice assistants, including Warframe's Cephalon system, voice synthesis technologies, and implementation patterns
 - **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)**: Phased development plan with technology recommendations and success metrics
+- **[Game State Integration](docs/GAME_STATE_INTEGRATION.md)** ⭐ **NEW**: Complete guide for integrating the AI Assistant with your Minecraft mod or game
 - **[Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md)** ⭐: Complete 10-week plan to make Mittenz's voice sound genuinely human with emotional expression
-- **[Voice Model Target](docs/VOICE_MODEL_TARGET.md)** ✨ **NEW**: Technical specification for Mittenz's voice inspired by Hitagi Senjougahara's vocal characteristics
+- **[Voice Model Target](docs/VOICE_MODEL_TARGET.md)** ✨: Technical specification for Mittenz's voice inspired by Hitagi Senjougahara's vocal characteristics
 - **[Quick Start: Human Audio](docs/QUICKSTART_HUMAN_AUDIO.md)**: Get started with human-like audio generation in 5-10 minutes
 
 ## Research Highlights
@@ -59,13 +60,21 @@ See the [Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md) for development
 
 ## Project Status
 
+**Phase 1**: ✅ **Complete** - Core architecture, personality design, and TTS integration  
+**Phase 2**: 🚧 **In Progress** - Game state integration layer implemented, dialogue expansion ongoing  
 **Audio System**: 🎯 **Active Development** - Human-like voice generation system ready for implementation (see [Human Audio Plan](docs/HUMAN_AUDIO_PLAN.md))
 
-**Overall**: Research and planning phase complete. Implementation following the phased approach outlined in the roadmap documentation.
+**Overall**: Foundation complete. Phase 2 game integration layer now available. See [Game State Integration Guide](docs/GAME_STATE_INTEGRATION.md) for Minecraft mod integration.
 An in-game AI assistant for the Adastrea (Ad Astra) Minecraft mod that provides companionship, teaching, and reminders to players during their space exploration adventures.
 
 ## Features
 
+- **Game State Integration** ✨ **NEW**: Event-driven system for connecting game events to AI responses
+  - Resource warnings (oxygen, fuel, health, temperature)
+  - Location and discovery announcements
+  - Achievement celebrations
+  - Emergency alerts with severity levels
+  - Context-aware responses based on relationship stage
 - **Audio System**: Text-to-speech voice synthesis for natural conversation
   - **Voice Model**: Inspired by Hitagi Senjougahara (Monogatari Series) vocal characteristics - mature, controlled delivery with crisp articulation
   - **Emotional Expression**: 11 emotion profiles with contextual prosody

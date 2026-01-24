@@ -285,6 +285,20 @@ public class MittenzProfile extends AssistantProfile {
     }
     
     /**
+     * Record a concern that Mittenz is aware of
+     * @param concernType The type of concern (oxygen, temperature, emergency, etc.)
+     */
+    public void recordConcern(String concernType) {
+        // For now, this is a placeholder for future context tracking
+        // Could be expanded to track what Mittenz is worried about
+        // and influence her dialogue selection
+        if (concernType != null && !concernType.trim().isEmpty()) {
+            // Future: Add to a list of current concerns
+            // Future: Adjust dialogue based on active concerns
+        }
+    }
+    
+    /**
      * Get a memory fragment from Mittenz's past
      * @return A memory fragment dialogue
      */
