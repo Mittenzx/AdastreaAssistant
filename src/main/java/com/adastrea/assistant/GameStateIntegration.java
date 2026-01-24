@@ -13,7 +13,16 @@ public class GameStateIntegration implements GameStateListener {
     private final AIAssistant assistant;
     private final ContextTracker contextTracker;
     private final Map<String, Long> lastWarningTime;
+    
+    // Thresholds
     private static final long WARNING_COOLDOWN_MS = 30000; // 30 seconds between same warnings
+    private static final int OXYGEN_CRITICAL_THRESHOLD = 10;
+    private static final int OXYGEN_WARNING_THRESHOLD = 30;
+    private static final int HEALTH_CRITICAL_THRESHOLD = 20;
+    private static final int HEALTH_WARNING_THRESHOLD = 50;
+    private static final int EMERGENCY_CRITICAL_SEVERITY = 4;
+    private static final int EMERGENCY_HIGH_SEVERITY = 3;
+    private static final int IDLE_TIME_THRESHOLD_MINUTES = 5;
     
     public GameStateIntegration(AIAssistant assistant) {
         this.assistant = assistant;
@@ -49,13 +58,13 @@ public class GameStateIntegration implements GameStateListener {
             oxygenLevel < 20 ? ContextTracker.EventSeverity.CRITICAL : ContextTracker.EventSeverity.HIGH);
         contextTracker.updatePlayerState("oxygen", oxygenLevel);
         
-        String urgency = oxygenLevel < 20 ? "urgent" : "worried";
+        String urgency = oxygenLevel < HEALTH_CRITICAL_THRESHOLD ? "urgent" : "worried";
         String message;
         
-        if (oxygenLevel < 10) {
+        if (oxygenLevel < OXYGEN_CRITICAL_THRESHOLD) {
             message = "Critical! Oxygen at " + oxygenLevel + "%! You have about " + 
                      timeRemaining + " seconds!";
-        } else if (oxygenLevel < 30) {
+        } else if (oxygenLevel < OXYGEN_WARNING_THRESHOLD) {
             message = "Warning: Oxygen levels dropping. Currently at " + oxygenLevel + "%.";
         } else {
             message = "Heads up - oxygen is getting low. Might want to check that.";
@@ -186,12 +195,12 @@ public class GameStateIntegration implements GameStateListener {
         
         String message;
         
-        if (healthLevel < 20) {
+        if (healthLevel < HEALTH_CRITICAL_THRESHOLD) {
             message = "You're badly hurt! Health at " + healthLevel + "%!";
             if (damageSource != null && !damageSource.isEmpty()) {
                 message += " That " + damageSource + " really did a number on you.";
             }
-        } else if (healthLevel < 50) {
+        } else if (healthLevel < HEALTH_WARNING_THRESHOLD) {
             message = "Take it easy - you're at " + healthLevel + "% health.";
         } else {
             message = "Health is at " + healthLevel + "%. Be careful out there.";
@@ -237,9 +246,9 @@ public class GameStateIntegration implements GameStateListener {
     public void onEmergency(String emergencyType, int severity) {
         String message;
         
-        if (severity >= 4) {
+        if (severity >= EMERGENCY_CRITICAL_SEVERITY) {
             message = "EMERGENCY! " + emergencyType + "! Critical situation!";
-        } else if (severity >= 3) {
+        } else if (severity >= EMERGENCY_HIGH_SEVERITY) {
             message = "Alert: " + emergencyType + " detected. Immediate attention required.";
         } else {
             message = emergencyType + " warning. Please address when possible.";
@@ -291,7 +300,7 @@ public class GameStateIntegration implements GameStateListener {
     @Override
     public void onIdleCheck(int minutesSinceLastInteraction, String currentActivity) {
         // Only provide idle dialogue if enough time has passed
-        if (minutesSinceLastInteraction >= 5) {
+        if (minutesSinceLastInteraction >= IDLE_TIME_THRESHOLD_MINUTES) {
             assistant.provideCompanionDialogue();
         }
     }

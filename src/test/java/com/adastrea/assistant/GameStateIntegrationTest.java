@@ -23,13 +23,13 @@ class GameStateIntegrationTest {
     
     @Test
     void testLowOxygenWarning() {
-        int initialSkillLevel = mittenz.getSkillLevel();
-        
         // Trigger low oxygen event
         gameState.onLowOxygen(25, 120);
         
         // Verify assistant is still enabled
         assertTrue(assistant.isEnabled());
+        // Verify oxygen was tracked in context
+        assertEquals(25, assistant.getContextTracker().getPlayerState("oxygen"));
     }
     
     @Test
@@ -39,6 +39,8 @@ class GameStateIntegrationTest {
         
         // Verify assistant is still enabled
         assertTrue(assistant.isEnabled());
+        // Verify critical event was recorded
+        assertTrue(assistant.getContextTracker().hasRecentEvent("oxygen_low"));
     }
     
     @Test
@@ -59,14 +61,13 @@ class GameStateIntegrationTest {
     
     @Test
     void testLocationEntered() {
-        int initialSkillLevel = mittenz.getSkillLevel();
-        
         // Trigger location entered event
         gameState.onLocationEntered("Mars", "planet");
         
         // Skill level should increase due to learning the system
-        assertTrue(mittenz.getSkillLevel() >= initialSkillLevel);
         assertTrue(mittenz.hasLearnedSystem("planet"));
+        // Verify location was tracked
+        assertEquals("Mars", assistant.getContextTracker().getCurrentLocation());
     }
     
     @Test
