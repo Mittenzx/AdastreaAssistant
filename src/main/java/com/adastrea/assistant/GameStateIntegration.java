@@ -85,7 +85,7 @@ public class GameStateIntegration implements GameStateListener {
             if (temperature > TEMPERATURE_EXTREME_HEAT) {
                 message = "Extreme heat detected! " + temperature + " degrees. Find shelter immediately!";
             } else if (temperature < TEMPERATURE_DANGEROUS_COLD) {
-                message = "Temperature critical: " + temperature + " degrees. This could be dangerous.";
+                message = "Extreme cold detected! " + temperature + " degrees. Find shelter immediately!";
             } else {
                 message = "Temperature critical: " + temperature + " degrees. This could be dangerous.";
             }
